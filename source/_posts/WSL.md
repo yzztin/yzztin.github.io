@@ -1,7 +1,10 @@
 ---
 title: WSL
 date: 2024-12-16 11:21:46
-tags: Notes
+tags:
+- Windows
+- DevOps
+categories: Notes
 ---
 
 > WSL：Windows Subsystem for Linux，运行在 Hypervisor 虚拟化平台上的 Linux 子系统。

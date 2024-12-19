@@ -4,24 +4,25 @@ nav:
   posts:
     path: ./archives
     icon: mingcute:inbox-fill
-    text: Posts
-  publications:
-    path: ./publications
-    icon: mingcute:science-fill
-    text: Publications
+    name: Archives  # 图标旁显示的名称
+    show_name: false  # 取消显示
+  # publications:
+  #   path: ./publications
+  #   icon: mingcute:science-fill
+  #   name: Publications
   # Projects: /projects
   about:
     path: ./about
     icon: mingcute:user-info-fill
-    text: About
+    name: Me
   categories:
     path: ./categories
     icon: mingcute:classify-2-fill
-    text: Categories
+    name: Categories
   tags:
     path: ./tags
     icon: mingcute:tag-fill
-    text: Tags
+    name: Tags
   home:
     path: ./index
     icon: mingcute:home-2-fill
