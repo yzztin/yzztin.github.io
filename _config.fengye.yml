@@ -5,7 +5,7 @@ nav:
     path: ./archives
     icon: mingcute:inbox-fill
     name: Archives  # 图标旁显示的名称
-    show_name: false  # 取消显示
+    # show_name: false  # 取消显示
   # publications:
   #   path: ./publications
   #   icon: mingcute:science-fill
@@ -40,10 +40,10 @@ show_featured_posts: true
 year_align_center: true
 
 # favicon
-favicon: /favicon.ico
+favicon: /favicon-32x32.ico
 
 # logo
-portrait: /images/logo.svg  # Your profile image here
+portrait: /images/avatar.jpg  # Your profile image here
 show_profile_image: true
 
 # links
@@ -51,9 +51,9 @@ links:
   Github:
     link: https://www.github.com/yzztin
     icon: mingcute:github-fill
-  ZhiHu:
-    link: https://www.zhihu.com/people/chen-ying-fa-34
-    icon: ri:zhihu-line
+  # ZhiHu:
+  #   link: https://www.zhihu.com/people/chen-ying-fa-34
+  #   icon: ri:zhihu-line
   Twitter:
     link: https://www.twitter.com/yzztin
     icon: mingcute:social-x-fill

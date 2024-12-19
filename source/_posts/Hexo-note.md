@@ -47,6 +47,12 @@ tags: Notes
 3. 重新生成静态文件 `hexo g`
 
 
+## 配置文件
+- 配置文件生效顺序
+  1. 主题文件下的配置文件，如 `./themes/xxx/_config.yml`
+  2. 复制到根目录下的主题的配置文件，如 `./_config.[theme].yml`
+  3. 根目录下的配置文件，如 `./_config.yml` 
+
 ## 快速启动命令
 
 1. `hexo d -g`  生成静态文件并部署
