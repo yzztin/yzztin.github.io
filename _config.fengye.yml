@@ -11,18 +11,19 @@ nav:
   #   icon: mingcute:science-fill
   #   name: Publications
   # Projects: /projects
+  categories:
+    path: ./categories
+    icon: mingcute:classify-3-fill
+    name: Categories
+  tags:
+    path: ./tags
+    icon: mingcute:tag-2-fill
+    name: Tags
   about:
     path: ./about
     icon: mingcute:user-info-fill
     name: Me
-  categories:
-    path: ./categories
-    icon: mingcute:classify-2-fill
-    name: Categories
-  tags:
-    path: ./tags
-    icon: mingcute:tag-fill
-    name: Tags
+    show_name: false
   home:
     path: ./index
     icon: mingcute:home-2-fill
@@ -34,7 +35,8 @@ nav:
 
 email: yzztin223@gamil.com
 my_location: Beijing, China
-cv_path: /pdf/cv.pdf
+# resume
+cv_path: /pdf/test.jpg
 cv_last_update_date: Aug, 2024
 show_featured_posts: true
 year_align_center: true
