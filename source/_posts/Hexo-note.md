@@ -1,7 +1,9 @@
 ---
 title: Hexo-note
 date: 2024-12-16 13:49:29
-tags: Notes
+tags: 
+- Blog
+categories: Notes
 ---
 
 
@@ -11,13 +13,17 @@ tags: Notes
    - `npm install -g hexo-cli`  安装 hexo 命令行工具
    - `npm install hexo-renderer-pug hexo-renderer-stylus --save`  安装渲染器
    - `npm install hexo-deployer-git --save`  安装部署器
+   - markdown 相关：
+     - `npm un hexo-renderer-marked --save`  卸载 hexo 的默认 md 插件
+     - `npm i hexo-renderer-markdown-it --save`  安装新的 md 插件
 
 2. 初始化博客文件夹
     - `hexo init`  在一个空文件夹中初始化博客
     - `npm install`  安装依赖
 
-3. 新建文章
+3. 新建文章和页面
     - `hexo new "文章名"`  新建文章，会在 `./source/_posts/` 文件夹下新建一个 Markdown 文件
+    - `hexo new page "文件名"`  新建一个 "页面"，会生成 `./source/文件名/index.md`
 
 4. 生成静态文件
     - `hexo g`  生成静态文件，会在 `./public/` 文件夹下生成静态文件
@@ -56,3 +62,20 @@ tags: Notes
 ## 快速启动命令
 
 1. `hexo d -g`  生成静态文件并部署
+
+
+## 问题记录
+
+**1. 文件大小写问题：**
+   
+   1. git 会默认忽略对文件名的大小写的修改，导致博客的路径请求不到对应的文件
+   - 解决方式：在 `.deploy_git/.git/config` 文件中，修改为 `ignorecase = false`
+   2. “分类” 页面下总是请求小写的路径地址
+   - 解决方式：在 `themtes/fengye/layout/categories.ejs` 文件下修改代码为：
+        ```json
+        // 去除 category.path.toLowerCase() 方法
+        <a href="<%- url_for(category.path) %>" class="py-2 group">
+        ```
+
+   3. md 图片问题
+      - 对于某个 md 文章 `xxx.md` 使用相对路径引用图片 `![](../images/xxx/xxx.png)`，所有图片统一放在 `source/images/xxx/` 下
