@@ -4,12 +4,12 @@
 
 # Site
 title: Yzz's Blog
-subtitle: 'from yzztin'
-description: 'A blog for notes, thinking and life.'
+subtitle: "from yzztin"
+description: "A blog for notes, thinking and life."
 keywords:
 author: yzz
 language: zh
-timezone: 'Asia/Shanghai'
+timezone: "Asia/Shanghai"
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -37,7 +37,7 @@ titlecase: false # Transform title into titlecase
 external_link:
   enable: true # Open external links in new tab
   field: site # Apply to the whole site
-  exclude: ''
+  exclude: ""
 filename_case: 0
 render_drafts: false
 post_asset_folder: false # 通过 hexo new xxx 创建文章的同时还会自动生成一个文件夹，用以保存图片等资源
@@ -47,20 +47,20 @@ syntax_highlighter: highlight.js
 highlight:
   line_number: true
   auto_detect: false
-  tab_replace: ''
+  tab_replace: ""
   wrap: true
   hljs: false
 prismjs:
   preprocess: true
   line_number: true
-  tab_replace: ''
+  tab_replace: ""
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
-  path: ''
+  path: ""
   per_page: 10
   order_by: -date
 
@@ -80,7 +80,7 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## updated_option supports 'mtime', 'date', 'empty'
-updated_option: 'mtime'
+updated_option: "mtime"
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -108,34 +108,48 @@ deploy:
   name: yzz
   email: yzztin223@gmail.com
 
-# https://github.com/hexojs/hexo-renderer-markdown-it 插件配置
-# https://markdown-it.github.io/markdown-it/#MarkdownIt.renderInline
-# markdown:
-#   preset: 'default'
-#   render:
-#     html: true
-#     xhtmlOut: false
-#     breaks: false
-#     linkify: true
-#     typographer: false
-#   anchors:
-#     # Minimum level for ID creation. (Ex. h2 to h6)
-#     level: 2
-#     # A suffix that is prepended to the number given if the ID is repeated.
-#     collisionSuffix: ''
-#     # If `true`, creates an anchor tag with a permalink besides the heading.
-#     permalink: false
-#     # Class used for the permalink anchor tag.
-#     permalinkClass: header-anchor
-#     # Set to 'right' to add permalink after heading
-#     permalinkSide: 'left'
-#     # The symbol used to make the permalink
-#     permalinkSymbol: '#'
-#     # Transform anchor to (1) lower case; (2) upper case
-#     case: 0
-#     # Replace space with a character
-#     separator: '-'
-#   plugins:
-#   images:
-#     prepend_root: false
-#     post_asset: true
+# https://www.wrysmile.cn/Hexo-05.html
+markdown:
+  preset: "default"
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: false
+    linkify: true
+    typographer: false
+  anchors: # 锚点的配置
+    # 开始创建锚点的等级， 如 "2" 则表示从 H2 开始创建一直到 H6(最后).
+    level: 2
+    # 如果遇到重复的锚点 ID 为其添加数字编号时在这个数字前添加的前缀.
+    collisionSuffix: ""
+    # 如果为 true 则创建一个除标题外带有固定地址的的锚点标签.
+    permalink: false
+    # 定义固定锚点的 class 名.
+    permalinkClass: header-anchor
+    # 设定为 right 则会在标题后添加固定链接.
+    permalinkSide: "left"
+    # 定义固定链接使用的符号
+    permalinkSymbol: "#"
+    # 转换锚点 ID 中的字母为大写或小写， "0" 不转换, "1" 为小写, "2" 为大写.
+    case: 0
+    # 用于替换空格的符号
+    separator: "-"
+  plugins:
+    - markdown-it-expandable  # 折叠块 https://github.com/bioruebe/markdown-it-collapsible?tab=readme-ov-file
+    - markdown-it-container
+    - name: markdown-it-container
+      options: success
+    - name: markdown-it-container
+      options: tips
+    - name: markdown-it-container
+      options: warning
+    - name: markdown-it-container
+      options: danger
+  images:
+    lazyload: true # true: 图片只有在滚动到它们所在的页面部分时才会加载
+    # true: 图片的路径会被设置为相对于网站根目录的路径
+    # false: 图片的路径不会被修改
+    prepend_root: true
+    # true: 文章中的图片和资源文件会被复制到文章生成的 HTML 文件所在的目录下，
+    # false: 文章中的图片和资源文件会保留在原始位置，不会被复制到文章生成的 HTML 文件所在的目录下
+    post_asset: false

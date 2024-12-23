@@ -24,6 +24,9 @@
     "hexo-renderer-pug": "^3.0.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^1.0.0"
+    "hexo-theme-landscape": "^1.0.0",
+    "markdown-it-collapsible": "^2.0.2",
+    "markdown-it-container": "^4.0.0",
+    "markdown-it-expandable": "^1.0.2"
   }
 }
