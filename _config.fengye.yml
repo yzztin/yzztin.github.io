@@ -19,10 +19,15 @@ nav:
     path: ./tags
     icon: mingcute:tag-2-fill
     name: Tags
-  about:
-    path: ./about
-    icon: mingcute:user-info-fill
-    name: Me
+  # about:
+  #   path: ./about
+  #   icon: mingcute:user-info-fill
+  #   name: Me
+  #   show_name: false
+  clock:
+    path: ./clock
+    icon: mingcute:time-fill
+    name: Clock
     show_name: false
   home:
     path: ./index
@@ -36,16 +41,16 @@ nav:
 email: yzztin223@gamil.com
 my_location: Beijing, China
 # resume
-cv_path: /pdf/test.jpg
+cv_path: /pdf/test.jpg  # source/pdf/
 cv_last_update_date: Aug, 2024
 show_featured_posts: true
 year_align_center: true
 
 # favicon
-favicon: /favicon-32x32.ico
+favicon: /images/favicon-32x32.ico
 
 # logo
-portrait: /images/avatar.jpg  # Your profile image here
+portrait: /images/avatar.jpg  # source/images/
 show_profile_image: true
 
 # links
