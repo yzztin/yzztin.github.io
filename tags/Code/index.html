@@ -19,7 +19,7 @@
 
 
 
-<title>Hexo-note | Yzz&#39;s Blog</title>
+<title>Tag: Code | Yzz&#39;s Blog</title>
 
 
 
@@ -466,72 +466,130 @@
 </div>
 
   <main>
-    <!-- css -->
-
-<link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
-
-  
-<link rel="stylesheet" href="/lib/tocbot/tocbot.min.css">
-
-    <!-- toc -->
     
-  <!-- tocbot -->
-<nav class="post-toc toc text-sm w-40 relative top-32 right-4 opacity-70 hidden lg:block" style="position: fixed !important;"></nav>
+    <!-- 显示某个tag的所有post -->
+    <div class="flex flex-wrap justify-center items-center">
+        <div class="
+            tag
+            mt-6
+            text-lg
+            rounded-full
+            px-3
+            py-1
+            border-2
+            border-[var(--c-theme)]
+            text-[var(--c-theme)]
+            bg-[var(--c-0)]
+            dark:bg-[var(--c-0)]
+            dark:drop-shadow-none
+            ">
+            Code
+        </div>
+    </div>
 
-
-<section class="px-6 max-w-prose mx-auto md:px-0">
-  <!-- Post header before content -->
-  <header class="py-4">
-    <div class="flex flex-col gap-2 pt-4 md:pt-6">
-      <!-- Title -->
-      <div id="article-title" class="leading-snug">
-        <p class="text-3xl font-bold text-[var(--c-100)] mb-4">Hexo-note</p>
+<section class="px-2 py-8 max-w-prose mx-auto gap-4 grid grid-cols-1">
+  
+  <!-- Sort posts by date -->
+  
+  
+    
+    <!-- Large text showing the year in the background -->
+    
+      <div class="relative pointer-events-none h-[30px] -z-50">
+        <div class="absolute -top-6 w-[100%]">
+          <p class="
+            text-clip
+            overflow-hidden
+            text-9xl
+            font-extrabold
+            text-[var(--c-theme)]
+            opacity-10
+            dark:opacity-20
+            text-center
+            ">
+            2024
+          </p>
+        </div>
       </div>
-      <!-- Meta data -->
-      <div>
-        <section class="
-          flex flex-col gap-x-2 gap-y-1 text-sm text-[var(--c-100)]">
-          <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <!-- Dates -->
-            <div class="flex items-center gap-1">
-              <iconify-icon width="18" icon="mingcute:add-circle-fill" ></iconify-icon>
-              Created: <time class="w-max">2024-12-16</time>
-            </div>
-            <div class="flex items-center gap-1">
-              <iconify-icon width="18" icon="mingcute:refresh-3-fill" ></iconify-icon>
-              Edited: <time class="w-max">2024-12-25</time>
-            </div>
-          </div>
-          <div class="flex flex-wrap items-center gap-x-3 gap-y-3">
-            <!-- Author -->
+    
+    <!-- The post -->
+    <div class="w-full">
+      <!-- One post item in a list -->
+<div class="
+    post-container
+    px-2 py-2
+    flex flex-col gap-3">
+    <div class="flex flex-row items-center gap-4 max-h-36">
+        
+            <div class="flex flex-col gap-1">
+                <!-- Post title -->
+                <a href="/2024/12/29/Git/">
+                    <h2 class="
+                        text-[var(--c-80)]
+                        font-bold
+                        text-xl
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        hover:underline">
+                        Git
+                    </h2>
+                </a>
+            <!-- Post excerpt -->
             
-
-            <!-- Word count -->
-            <span class="flex items-center gap-1">
-              <iconify-icon width="18" icon="mingcute:book-2-fill" ></iconify-icon>
-              <span>763 words, 3 min</span>
+            </div>
+        </div>
+        <!-- Post Statistics -->
+        <div class="flex flex-wrap items-center gap-x-2 text-sm
+            text-[var(--c-70)]">
+            <span class="flex flex-row items-center gap-1 group">
+                <iconify-icon width="16"
+                    icon="mingcute:add-circle-fill"></iconify-icon>
+                <time class="w-max">
+                    2024-12-29
+                </time>
+            </span>
+            <span class="flex flex-row items-center gap-1 group">
+                <iconify-icon width="16"
+                    icon="mingcute:refresh-3-fill"></iconify-icon>
+                <time class="w-max">
+                    2024-12-31
+                </time>
+            </span>
+            <span class="flex flex-row items-center gap-1 group">
+                <iconify-icon width="16"
+                    icon="mingcute:book-2-fill"></iconify-icon>
+                <p class="w-max">
+                    4.8k words, 18 min
+                </p>
             </span>
             <!-- Categories -->
+            <span class="flex flex-row items-center gap-1 group">
+                
+                    <iconify-icon class="
+                            group-hover:scale-125
+                            transition-transform
+                            group-hover:text-[var(--c-theme)]
+                        "
+                        width="16"
+                        icon="mingcute:classify-2-fill" class="mr-0">
+                    </iconify-icon>
+                    
+                        <a class="underline underline-offset-2"
+                            href="/categories/notes/">
+                            Notes
+                        </a>
+                    
+                
+            </span>
+        </div>
+        <!-- Tags -->
+        <div>
             
-              <!-- <span class="text-gray-400">·</span> -->
-              <span class="flex flex-row items-center gap-1 group hover:underline">
-                <iconify-icon class="transition-all group-hover:scale-125 mr-0"
-                  width="18"
-                  icon="mingcute:classify-2-fill">
-                </iconify-icon>
-                <a class="article-category-link" href="/categories/Notes/">Notes</a>
-              </span>
-            
-          </div>
-        </section>
-      </div>
-      <!-- tags -->
-      <div>
-        
+                
 <div class="flex flex-wrap gap-1">
   
     
-      <a href="/tags/Blog/" 
+      <a href="/tags/DevOps/" 
         class="
           tag
           text-sm
@@ -548,316 +606,43 @@
           dark:hover:text-[var(--c-10)]
           dark:hover:bg-[var(--c-theme)]
         ">
-        Blog
+        DevOps
+      </a>
+    
+      <a href="/tags/Code/" 
+        class="
+          tag
+          text-sm
+          rounded-full
+          px-[5px]
+          border-[1px]
+          border-[var(--c-theme)]
+          text-[var(--c-theme)]
+          bg-[var(--c-0)]
+          dark:bg-[var(--c-0)]
+          dark:drop-shadow-none
+          hover:bg-[var(--c-theme)]
+          hover:text-[var(--c-0)]
+          dark:hover:text-[var(--c-10)]
+          dark:hover:bg-[var(--c-theme)]
+        ">
+        Code
       </a>
     
   
 </div>
-      </div>
+            
+        </div>
+</div>
+
     </div>
-  </header>
-  <!-- content -->
-  <article class="post-content prose m-auto dark:prose-invert">
-    <h2 id="初次使用">初次使用</h2>
-<ol>
-<li class="lvl-3">
-<p>安装应用程序</p>
-<ul class="lvl-2">
-<li class="lvl-5"><code>npm install -g hexo-cli</code>  安装 hexo 命令行工具</li>
-<li class="lvl-5"><code>npm install hexo-renderer-pug hexo-renderer-stylus --save</code>  安装渲染器</li>
-<li class="lvl-5"><code>npm install hexo-deployer-git --save</code>  安装部署器</li>
-<li class="lvl-5">markdown 相关：
-<ul class="lvl-4">
-<li class="lvl-7"><code>npm un hexo-renderer-marked --save</code>  卸载 hexo 的默认 md 插件</li>
-<li class="lvl-7"><code>npm i hexo-renderer-markdown-it --save</code>  安装新的 md 插件</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>初始化博客文件夹</p>
-<ul class="lvl-2">
-<li class="lvl-6"><code>hexo init</code>  在一个空文件夹中初始化博客</li>
-<li class="lvl-6"><code>npm install</code>  安装依赖</li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>新建文章和页面</p>
-<ul class="lvl-2">
-<li class="lvl-6"><code>hexo new &quot;文章名&quot;</code>  新建文章，会在 <code>./source/_posts/</code> 文件夹下新建一个 Markdown 文件</li>
-<li class="lvl-6"><code>hexo new page &quot;文件名&quot;</code>  新建一个 &quot;页面&quot;，会生成 <code>./source/文件名/index.md</code></li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>生成静态文件</p>
-<ul class="lvl-2">
-<li class="lvl-6"><code>hexo g</code>  生成静态文件，会在 <code>./public/</code> 文件夹下生成静态文件</li>
-<li class="lvl-6"><code>hexo clean</code>  清除缓存，会删除 <code>./public/</code> 文件夹下的静态文件</li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>启动本地服务器</p>
-<ul class="lvl-2">
-<li class="lvl-5"><code>hexo s</code></li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>部署到服务器</p>
-<ul class="lvl-2">
-<li class="lvl-5">配置 <code>_config.yml</code> 文件   <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">    <span class="attr">repo:</span> <span class="string">git@github.com:yzztin/yzztin.github.io.git</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">hexo</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">yzz</span></span><br><span class="line">    <span class="attr">email:</span> <span class="string">yzztin223@gmail.com</span></span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-5"><code>hexo d</code>  部署到服务器，会将 <code>./public/</code> 文件夹下的静态文件部署到服务器上</li>
-<li class="lvl-5">会生成一个文件夹 <code>.deplopy_git</code>，这里保存 commit 历史和提交信息，每次 <code>hexo deploy</code> 都会强制推送这个文件夹的 commit 到远程</li>
-</ul>
-</li>
-</ol>
-<h2 id="主题：">主题：</h2>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a></p>
-</blockquote>
-<ol>
-<li class="lvl-3">
-<p>下载主题文件到 <code>./themes/</code> 目录下</p>
-</li>
-<li class="lvl-3">
-<p>修改 <code>./_config.yml</code> 文件，如 <code>theme: cactus-light</code></p>
-</li>
-<li class="lvl-3">
-<p>重新生成静态文件 <code>hexo g</code></p>
-</li>
-</ol>
-<h2 id="配置文件">配置文件</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>配置文件生效顺序</p>
-<ol>
-<li class="lvl-5">主题文件下的配置文件，如 <code>./themes/xxx/_config.yml</code></li>
-<li class="lvl-5">复制到根目录下的主题的配置文件，如 <code>./_config.[theme].yml</code></li>
-<li class="lvl-5">根目录下的配置文件，如 <code>./_config.yml</code></li>
-</ol>
-</li>
-</ul>
-<h2 id="快速启动命令">快速启动命令</h2>
-<ol>
-<li class="lvl-3">
-<p><code>hexo d -g</code>  生成静态文件并部署</p>
-</li>
-</ol>
-<h2 id="问题记录">问题记录</h2>
-<ol>
-<li class="lvl-6">
-<p>git 会默认忽略对文件名的大小写的修改，导致博客的路径请求不到对应的文件</p>
-</li>
-</ol>
-<ul class="lvl-0">
-<li class="lvl-5">
-<p>解决方式：在 <code>.deploy_git/.git/config</code> 文件中，修改为 <code>ignorecase = false</code></p>
-</li>
-</ul>
-<ol>
-<li class="lvl-6">
-<p>“分类” 页面下总是请求小写的路径地址</p>
-</li>
-</ol>
-<ul class="lvl-0">
-<li class="lvl-5">
-<p>解决方式：在 <code>themtes/fengye/layout/categories.ejs</code> 文件下修改代码为：</p>
-   <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 去除 category.path.toLowerCase() 方法</span></span><br><span class="line">&lt;a href=<span class="string">&quot;&lt;%- url_for(category.path) %&gt;&quot;</span> class=<span class="string">&quot;py-2 group&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol>
-<li class="lvl-6">
-<p>md 图片问题</p>
-<ul class="lvl-2">
-<li class="lvl-8">对于某个 md 文章 <code>xxx.md</code> 使用相对路径引用图片 <code>![](../images/xxx/xxx.png)</code>，所有图片统一放在 <code>source/images/xxx/</code> 下</li>
-<li class="lvl-8">在 <code>_config.yml</code> 文件中添加配置： <details>
- <summary> 增加的配置内容 </summary>
- <pre><code lang='yaml'>markdown:
-    preset: 'default'
-    render:
-       html: true
-       xhtmlOut: false
-       breaks: false
-       linkify: true
-       typographer: false
-    anchors:
-       # Minimum level for ID creation. (Ex. h2 to h6)
-       level: 2
-       # A suffix that is prepended to the number given if the ID is repeated.
-       collisionSuffix: ''
-       # If `true`, creates an anchor tag with a permalink besides the heading.
-       permalink: false
-       # Class used for the permalink anchor tag.
-       permalinkClass: header-anchor
-       # Set to 'right' to add permalink after heading
-       permalinkSide: 'left'
-       # The symbol used to make the permalink
-       permalinkSymbol: '#'
-       # Transform anchor to (1) lower case; (2) upper case
-       case: 0
-       # Replace space with a character
-       separator: '-'
-    plugins:
-    images:
-       prepend_root: false
-       post_asset: true</code></pre>
- </details>
-</li>
-</ul>
-</li>
-<li class="lvl-6">
-<p>主页 <code>Cannot GET /</code></p>
-<ul class="lvl-2">
-<li class="lvl-8">没有成功生成 <code>public/index.html</code> 文件，可能是缺少某个依赖，执行 <code>npm audit fix</code> ，再次生成测试</li>
-<li class="lvl-8">或者删除 <code>node_modules</code> 文件夹，执行 <code>npm install</code> 重新安装依赖</li>
-</ul>
-</li>
-</ol>
-
-  </article>
-
-  <!-- prev and next -->
-  <div class="flex justify-between mt-4 pt-4
-    border-t border-[var(--c-sep)] text-sm
-    gap-2 text-[var(--c-50)]
-  ">
-    <div>
-      
-        <a href="/2024/12/21/test2/"
-          class="
-            transition-all
-            flex justify-center
-            hover:-translate-x-1
-            hover:text-[var(--c-80)]
-          ">
-          <iconify-icon width="20" icon="mingcute:left-fill" data-inline="false">
-          </iconify-icon>
-          test2
-        </a>
-      
-    </div>
-    <div>
-      
-        <a href="/2024/12/16/WSL/"
-          class="
-            flex 
-            justify-center
-            hover:translate-x-1 
-            transition-transform
-            hover:text-[var(--c-100)]
-          "
-        >
-          WSL
-          <iconify-icon width="20" icon="mingcute:right-fill" data-inline="false"></iconify-icon>
-        </a>
-      
-    </div>
-  </div>
-
-  <!-- comment -->
-  <div class="article-comments mt-12">
-    
-
-  </div>
+  
 </section>
-<!-- js inspect -->
 
-<script src="/lib/clipboard.min.js"></script>
+<div class="border-t border-[--c-40]">
 
+</div>
 
-<script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-  });
-</script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-  });
-</script>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>
-  $(document).ready(() => {
-    const maraidConfig = {
-      theme: "default",
-      logLevel: 3,
-      flowchart: { curve: "linear" },
-      gantt: { axisFormat: "%m/%d/%Y" },
-      sequence: { actorMargin: 50 },
-    };
-    mermaid.initialize(maraidConfig);
-  });
-</script>
-
-
-
-<script src="/lib/fancybox/fancybox.umd.min.js"></script>
-
-<script>
-  $(document).ready(() => {
-    $('.post-content').each(function(i){
-      $(this).find('img').each(function(){
-        if ($(this).parent().hasClass('fancybox') || $(this).parent().is('a')) return;
-        var alt = this.alt;
-        var title = this.title;
-        if (alt) $(this).after('<span class="fancybox-alt">' + alt + '</span>');
-        else if (title) $(this).after('<span class="fancybox-title">' + title + '</span>');
-        $(this).wrap('<a class="fancybox-img" href="' + this.src + '" data-fancybox=\"gallery\" data-caption="' + title + '"></a>')
-      });
-      $(this).find('.fancybox').each(function(){
-        $(this).attr('rel', 'article' + i);
-      });
-    });
-
-    Fancybox.bind('[data-fancybox="gallery"]', {
-        // options
-    })
-  })
-</script>
-
-<!-- tocbot begin -->
-
-<script src="/lib/tocbot/tocbot.min.js"></script>
-
-<script>
-  $(document).ready(() => {
-      tocbot.init({
-        // Where to render the table of contents.
-        tocSelector: '.post-toc',
-        // Where to grab the headings to build the table of contents.
-        contentSelector: '.post-content',
-        // Which headings to grab inside of the contentSelector element.
-        headingSelector: 'h1, h2, h3',
-        // For headings inside relative or absolute positioned containers within content.
-        hasInnerContainers: true,
-    });
-  })
-</script>
-<!-- tocbot end -->
 
   </main>
   <footer class="flex flex-col mt-18 mb-12 items-center
