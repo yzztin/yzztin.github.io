@@ -25,6 +25,8 @@ categories: Notes
 
 + 直接输入 `wsl` 运行默认的 Linux 子系统
     - `wsl -s Ubuntu-22.04`  设置默认的子系统
+    - `wsl -d xxx`  启动指定的系统
+    - `wsl --set-default xxx`  设置默认的子系统
 + 在 windows 的 powershell 中开启对应的 linux 系统
 + 在 windows 任务管理器的左侧栏看到不同 Linux 对应的文件
 
@@ -32,8 +34,8 @@ categories: Notes
 
 **子系统备份和恢复：**
 
-7. `wsl --export Ubuntu-22.04 Ubuntu-22.04.tar`  将子系统备份到压缩包
-8. `wsl --import <子系统名称> <子系统数据存放路径> <压缩包路径>` 将子系统压缩包导入到指定目录
+1. `wsl --export Ubuntu-22.04 Ubuntu-22.04.tar`  将子系统备份到压缩包
+2. `wsl --import <子系统名称> <子系统数据存放路径> <压缩包路径>` 将子系统压缩包导入到指定目录
 
 
 
