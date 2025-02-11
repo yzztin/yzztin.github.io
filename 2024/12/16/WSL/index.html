@@ -499,7 +499,7 @@
             </div>
             <div class="flex items-center gap-1">
               <iconify-icon width="18" icon="mingcute:refresh-3-fill" ></iconify-icon>
-              Edited: <time class="w-max">2025-01-23</time>
+              Edited: <time class="w-max">2025-02-11</time>
             </div>
           </div>
           <div class="flex flex-wrap items-center gap-x-3 gap-y-3">
@@ -509,7 +509,7 @@
             <!-- Word count -->
             <span class="flex items-center gap-1">
               <iconify-icon width="18" icon="mingcute:book-2-fill" ></iconify-icon>
-              <span>365 words, 1 min</span>
+              <span>460 words, 1 min</span>
             </span>
             <!-- Categories -->
             
@@ -645,6 +645,19 @@
 <p>在 wsl Linux 上可以直接使用 windows 的显卡，查看显卡：<code>nvidia-smi</code></p>
 </li>
 </ul>
+<p><strong>本地主机和 WSL 共享端口服务：</strong></p>
+<blockquote>
+<p>比如我在 wsl 开启了一个 5001 端口服务，我希望可以通过本地主机 127.0.0.1:5001 访问到 wsl 上的服务</p>
+</blockquote>
+<ol>
+<li class="lvl-3">
+<p>在 windows 用户目录下新建 <code>.wslconfig</code> 文件，写入内容如下：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[experimental]</span><br><span class="line">networkingMode=mirrored</span><br><span class="line">dnsTunneling=true</span><br><span class="line">firewall=true</span><br><span class="line">autoProxy=true</span><br><span class="line">hostAddressLoopback=true</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>执行 <code>wsl --shutdown</code> 关闭 wsl 子系统，等待十几秒后重启</p>
+</li>
+</ol>
 
   </article>
 
