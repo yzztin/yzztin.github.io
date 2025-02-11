@@ -53,3 +53,17 @@ categories: Notes
 + 在 wsl Linux 上可以直接使用 windows 的显卡，查看显卡：`nvidia-smi`
 
 
+**本地主机和 WSL 共享端口服务：**
+> 比如我在 wsl 开启了一个 5001 端口服务，我希望可以通过本地主机 127.0.0.1:5001 访问到 wsl 上的服务
+
+1. 在 windows 用户目录下新建 `.wslconfig` 文件，写入内容如下：
+    ```conf
+    [experimental]
+    networkingMode=mirrored
+    dnsTunneling=true
+    firewall=true
+    autoProxy=true
+    hostAddressLoopback=true
+    ```
+2. 执行 `wsl --shutdown` 关闭 wsl 子系统，等待十几秒后重启
+
