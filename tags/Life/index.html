@@ -19,7 +19,7 @@
 
 
 
-<title>tags | Yzz&#39;s Blog</title>
+<title>Tag: Life | Yzz&#39;s Blog</title>
 
 
 
@@ -466,234 +466,162 @@
 </div>
 
   <main>
-    <!-- 
-This page has two versions, which is shown is based on whether current page
-is "tags".
-
-- url 'http://localhost:4000/tags/' return false.
-- url 'http://localhost:4000/tags/test/' return true.
-
-The '/tags/' page shows all tags and is where you land on when you click
-on the "Tags" in the navigation bar. Otherwise if you enter 'tags' by clicking on of the tag elements in some
-posts, and it shows all posts with that tag.
-
-To add a "Tags" page.
-
-1. hexo new page "tag"
-2. cd source/tags/index.md
-3. Add the following front matter.
-
----
-title: '''tags'''
-date: 2019-06-09 09:56:49
-layout: tags
----
--->
-
-
-  <!-- 显示所有tag，让用户选择 -->
-  <div class="flex flex-col gap-2 px-6 max-w-prose mx-auto md:px-0 my-8">
-    <div class="flex flex-row items-center gap-2">
-      <iconify-icon width="28" icon="mingcute:tag-fill"></iconify-icon>
-      <h2 class="font-bold text-2xl">Tags</h2>
+    
+    <!-- 显示某个tag的所有post -->
+    <div class="flex flex-wrap justify-center items-center">
+        <div class="
+            tag
+            mt-6
+            text-lg
+            rounded-full
+            px-3
+            py-1
+            border-2
+            border-[var(--c-theme)]
+            text-[var(--c-theme)]
+            bg-[var(--c-0)]
+            dark:bg-[var(--c-0)]
+            dark:drop-shadow-none
+            ">
+            Life
+        </div>
     </div>
-    <div class="tags-container flex flex-wrap gap-1 mt-2">
-      
-      
-        <a href="/tags/DevOps/"
-          class="
-            tag
-            flex flex-row items-center
-            text-[16px]
-            px-[8px]
-            py-[2px]
-            rounded-full
-            drop-shadow-md
-            border-[1px]
-            border-[var(--c-theme)]
+
+<section class="px-2 py-8 max-w-prose mx-auto gap-4 grid grid-cols-1">
+  
+  <!-- Sort posts by date -->
+  
+  
+    
+    <!-- Large text showing the year in the background -->
+    
+      <div class="relative pointer-events-none h-[30px] -z-50">
+        <div class="absolute -top-6 w-[100%]">
+          <p class="
+            text-clip
+            overflow-hidden
+            text-9xl
+            font-extrabold
             text-[var(--c-theme)]
-            bg-[var(--c-0)]
-            dark:bg-[var(--c-0)]
-            dark:drop-shadow-none
-            hover:bg-[var(--c-theme)]
-            dark:hover:bg-[var(--c-theme)]
-            hover:text-[var(--c-0)]
-          "
-          href="/tags/DevOps/">
-          #DevOps
-          <span class="
-            text-[var(--c-50)]
-            dark:text-[var(--c-70)]
-            hover:dark:text-[var(--c-80)]
-            hover:text-[var(--c-20)]
-            pl-1
-            text-sm">
-            ×3
-          </span>
-        </a>
-      
-        <a href="/tags/Blog/"
-          class="
-            tag
-            flex flex-row items-center
-            text-[16px]
-            px-[8px]
-            py-[2px]
-            rounded-full
-            drop-shadow-md
-            border-[1px]
-            border-[var(--c-theme)]
-            text-[var(--c-theme)]
-            bg-[var(--c-0)]
-            dark:bg-[var(--c-0)]
-            dark:drop-shadow-none
-            hover:bg-[var(--c-theme)]
-            dark:hover:bg-[var(--c-theme)]
-            hover:text-[var(--c-0)]
-          "
-          href="/tags/Blog/">
-          #Blog
-          <span class="
-            text-[var(--c-50)]
-            dark:text-[var(--c-70)]
-            hover:dark:text-[var(--c-80)]
-            hover:text-[var(--c-20)]
-            pl-1
-            text-sm">
-            ×2
-          </span>
-        </a>
-      
-        <a href="/tags/Life/"
-          class="
-            tag
-            flex flex-row items-center
-            text-[16px]
-            px-[8px]
-            py-[2px]
-            rounded-full
-            drop-shadow-md
-            border-[1px]
-            border-[var(--c-theme)]
-            text-[var(--c-theme)]
-            bg-[var(--c-0)]
-            dark:bg-[var(--c-0)]
-            dark:drop-shadow-none
-            hover:bg-[var(--c-theme)]
-            dark:hover:bg-[var(--c-theme)]
-            hover:text-[var(--c-0)]
-          "
-          href="/tags/Life/">
-          #Life
-          <span class="
-            text-[var(--c-50)]
-            dark:text-[var(--c-70)]
-            hover:dark:text-[var(--c-80)]
-            hover:text-[var(--c-20)]
-            pl-1
-            text-sm">
-            ×1
-          </span>
-        </a>
-      
-        <a href="/tags/Time/"
-          class="
-            tag
-            flex flex-row items-center
-            text-[16px]
-            px-[8px]
-            py-[2px]
-            rounded-full
-            drop-shadow-md
-            border-[1px]
-            border-[var(--c-theme)]
-            text-[var(--c-theme)]
-            bg-[var(--c-0)]
-            dark:bg-[var(--c-0)]
-            dark:drop-shadow-none
-            hover:bg-[var(--c-theme)]
-            dark:hover:bg-[var(--c-theme)]
-            hover:text-[var(--c-0)]
-          "
-          href="/tags/Time/">
-          #Time
-          <span class="
-            text-[var(--c-50)]
-            dark:text-[var(--c-70)]
-            hover:dark:text-[var(--c-80)]
-            hover:text-[var(--c-20)]
-            pl-1
-            text-sm">
-            ×1
-          </span>
-        </a>
-      
-        <a href="/tags/Code/"
-          class="
-            tag
-            flex flex-row items-center
-            text-[16px]
-            px-[8px]
-            py-[2px]
-            rounded-full
-            drop-shadow-md
-            border-[1px]
-            border-[var(--c-theme)]
-            text-[var(--c-theme)]
-            bg-[var(--c-0)]
-            dark:bg-[var(--c-0)]
-            dark:drop-shadow-none
-            hover:bg-[var(--c-theme)]
-            dark:hover:bg-[var(--c-theme)]
-            hover:text-[var(--c-0)]
-          "
-          href="/tags/Code/">
-          #Code
-          <span class="
-            text-[var(--c-50)]
-            dark:text-[var(--c-70)]
-            hover:dark:text-[var(--c-80)]
-            hover:text-[var(--c-20)]
-            pl-1
-            text-sm">
-            ×1
-          </span>
-        </a>
-      
-        <a href="/tags/Windows/"
-          class="
-            tag
-            flex flex-row items-center
-            text-[16px]
-            px-[8px]
-            py-[2px]
-            rounded-full
-            drop-shadow-md
-            border-[1px]
-            border-[var(--c-theme)]
-            text-[var(--c-theme)]
-            bg-[var(--c-0)]
-            dark:bg-[var(--c-0)]
-            dark:drop-shadow-none
-            hover:bg-[var(--c-theme)]
-            dark:hover:bg-[var(--c-theme)]
-            hover:text-[var(--c-0)]
-          "
-          href="/tags/Windows/">
-          #Windows
-          <span class="
-            text-[var(--c-50)]
-            dark:text-[var(--c-70)]
-            hover:dark:text-[var(--c-80)]
-            hover:text-[var(--c-20)]
-            pl-1
-            text-sm">
-            ×1
-          </span>
-        </a>
-      
+            opacity-10
+            dark:opacity-20
+            text-center
+            ">
+            2025
+          </p>
+        </div>
+      </div>
+    
+    <!-- The post -->
+    <div class="w-full">
+      <!-- One post item in a list -->
+<div class="
+    post-container
+    px-2 py-2
+    flex flex-col gap-3">
+    <div class="flex flex-row items-center gap-4 max-h-36">
+        
+            <div class="flex flex-col gap-1">
+                <!-- Post title -->
+                <a href="/2025/02/13/100%E6%9D%A1%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%E5%B0%8F%E8%B4%B4%E5%A3%AB/">
+                    <h2 class="
+                        text-[var(--c-80)]
+                        font-bold
+                        text-xl
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        hover:underline">
+                        100 条美好生活小贴士
+                    </h2>
+                </a>
+            <!-- Post excerpt -->
+            
+            </div>
+        </div>
+        <!-- Post Statistics -->
+        <div class="flex flex-wrap items-center gap-x-2 text-sm
+            text-[var(--c-70)]">
+            <span class="flex flex-row items-center gap-1 group">
+                <iconify-icon width="16"
+                    icon="mingcute:add-circle-fill"></iconify-icon>
+                <time class="w-max">
+                    2025-02-13
+                </time>
+            </span>
+            <span class="flex flex-row items-center gap-1 group">
+                <iconify-icon width="16"
+                    icon="mingcute:refresh-3-fill"></iconify-icon>
+                <time class="w-max">
+                    2025-02-19
+                </time>
+            </span>
+            <span class="flex flex-row items-center gap-1 group">
+                <iconify-icon width="16"
+                    icon="mingcute:book-2-fill"></iconify-icon>
+                <p class="w-max">
+                    1.9k words, 6 min
+                </p>
+            </span>
+            <!-- Categories -->
+            <span class="flex flex-row items-center gap-1 group">
+                
+                    <iconify-icon class="
+                            group-hover:scale-125
+                            transition-transform
+                            group-hover:text-[var(--c-theme)]
+                        "
+                        width="16"
+                        icon="mingcute:classify-2-fill" class="mr-0">
+                    </iconify-icon>
+                    
+                        <a class="underline underline-offset-2"
+                            href="/categories/life/">
+                            Life
+                        </a>
+                    
+                
+            </span>
+        </div>
+        <!-- Tags -->
+        <div>
+            
+                
+<div class="flex flex-wrap gap-1">
+  
+    
+      <a href="/tags/Life/" 
+        class="
+          tag
+          text-sm
+          rounded-full
+          px-[5px]
+          border-[1px]
+          border-[var(--c-theme)]
+          text-[var(--c-theme)]
+          bg-[var(--c-0)]
+          dark:bg-[var(--c-0)]
+          dark:drop-shadow-none
+          hover:bg-[var(--c-theme)]
+          hover:text-[var(--c-0)]
+          dark:hover:text-[var(--c-10)]
+          dark:hover:bg-[var(--c-theme)]
+        ">
+        Life
+      </a>
+    
+  
+</div>
+            
+        </div>
+</div>
+
     </div>
-  </div>
+  
+</section>
+
+<div class="border-t border-[--c-40]">
+
+</div>
 
 
   </main>
