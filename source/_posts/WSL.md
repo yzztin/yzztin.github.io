@@ -10,8 +10,6 @@ categories: Notes
 
 > WSL：Windows Subsystem for Linux，运行在 Hypervisor 虚拟化平台上的 Linux 子系统。
 
-
-
 ## 1. 基本命令和使用
 1. `wsl --list -v`  查看虚拟机列表详细信息
 2. `wsl --list --online`  查看可安装的 linux 发行版系统
@@ -49,7 +47,7 @@ categories: Notes
     firewall=true
     autoProxy=true
     hostAddressLoopback=true
-    ```        
+    ```
 2. 执行 `wsl --shutdown` 关闭 wsl 子系统，等待十几秒后重启
 
 ### 3.2 在 wsl 上和 windows 共用相同的 ssh 密钥文件
