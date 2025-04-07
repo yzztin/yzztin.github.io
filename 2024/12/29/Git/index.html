@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="author" content="yzz">
+
+
+  <meta name="subtitle" content="from yzztin">
+
+
+  <meta name="description" content="A blog for notes, thinking and life.">
+
+
+
+<title>Git | Yzz&#39;s Blog</title>
+
+
+
+<link rel="icon" href="/images/favicon-32x32.ico">
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/css/search.css">
+
+
+
+<script src="/lib/jquery.min.js"></script>
+
+
+<script src="/lib/iconify-icon.min.js"></script>
+
+
+<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+  };
+</script>
+
+<script>
+  (function () {
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+    if (setting === "dark" || (prefersDark && setting !== "light"))
+      document.documentElement.classList.toggle("dark", true);
+    let isDark = document.documentElement.classList.contains("dark");
+  })();
+
+  $(document).ready(function () {
+    // init icon
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = document.documentElement.classList.contains("dark");
+    $("#theme-icon").attr("icon", isDark ? "ic:round-dark-mode" : "ic:round-light-mode");
+
+    function toggleGiscusTheme() {
+      const isDark = document.documentElement.classList.contains("dark");
+      const giscusFrame = document.querySelector("iframe.giscus-frame");
+      if (giscusFrame) {
+        giscusFrame.contentWindow.postMessage(
+          {
+            giscus: {
+              setConfig: {
+                theme: isDark ? "dark" : "light",
+              },
+            },
+          },
+          "https://giscus.app"
+        );
+      }
+    }
+
+
+    // toggle dark mode
+    function toggleDark() {
+      let isDark = document.documentElement.classList.contains("dark");
+      const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+      isDark = !isDark;
+      document.documentElement.classList.toggle("dark", isDark);
+      $("#theme-icon").attr("icon", isDark ? "ic:round-dark-mode" : "ic:round-light-mode");
+      if (prefersDark === isDark) {
+        localStorage.setItem("hexo-color-scheme", "auto");
+      } else {
+        localStorage.setItem("hexo-color-scheme", isDark ? "dark" : "light");
+      }
+      toggleGiscusTheme();
+    }
+    $("#toggle-dark").click(toggleDark);
+
+    // listen dark mode change
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+        if (setting === "auto") {
+          document.documentElement.classList.toggle("dark", e.matches);
+          $("#theme-icon").attr(
+            "icon",
+            e.matches ? "ic:round-dark-mode" : "ic:round-light-mode"
+          );
+          toggleGiscusTheme();
+        }
+      });
+  });
+</script>
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body 
+  class="
+    bg-[var(--c-0)]
+    text-[var(--c-80)]
+  ">
+  <!-- The navigation bar -->
+<header class="
+    flex flex-row items-center
+    w-full
+    pr-4
+    z-10
+    border-b-[1px]
+    border-b-[var(--c-border)]
+    dark:bg-[var(--c-0)]
+    dark:border-b-[var(--c-0)]
+    gap-2
+    h-[var(--h-header)]
+    text-[var(--c-80)]
+">
+  <!-- Left part -->
+  <div class="overflow-hidden h-full flex flex-row items-center">
+    <!-- Site Title on the top left -->
+    <a href="/" class="
+            whitespace-nowrap
+            text-2xl
+            text-[var(--c-theme)]
+            hover:text-[var(--c-theme)]
+            pl-4
+            font-black
+            bg-gradient-to-r from-cyan-500
+            to-blue-500 bg-clip-text text-transparent
+          ">
+      Yzz&#39;s Blog
+    </a>
+  </div>
+  <!-- Div for pushing items to both sides -->
+  <div class="flex-1"></div>
+  <!-- Right part -->
+  <div class="flex flex-row items-center z-20 h-full">
+    <!-- Page links -->
+    <div class="hidden sm:flex flex-row h-full">
+      
+        
+        
+          
+          
+        
+      <a href="/./archives" class="
+                        flex flex-row items-center
+                        gap-1
+                        hover:underline
+                        hover:bg-[var(--c-20)]
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        px-2
+                        py-1
+                        my-1
+                        rounded-lg
+                        group
+                        whitespace-nowrap
+                    ">
+        
+        <iconify-icon class="group-hover:scale-125 transition-transform" icon="mingcute:inbox-fill" width="22">
+        </iconify-icon>
+        
+        
+        <p>Archives</p>
+        
+      </a>
+      
+        
+        
+          
+          
+        
+      <a href="/./categories" class="
+                        flex flex-row items-center
+                        gap-1
+                        hover:underline
+                        hover:bg-[var(--c-20)]
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        px-2
+                        py-1
+                        my-1
+                        rounded-lg
+                        group
+                        whitespace-nowrap
+                    ">
+        
+        <iconify-icon class="group-hover:scale-125 transition-transform" icon="mingcute:classify-3-fill" width="22">
+        </iconify-icon>
+        
+        
+        <p>Categories</p>
+        
+      </a>
+      
+        
+        
+          
+          
+        
+      <a href="/./tags" class="
+                        flex flex-row items-center
+                        gap-1
+                        hover:underline
+                        hover:bg-[var(--c-20)]
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        px-2
+                        py-1
+                        my-1
+                        rounded-lg
+                        group
+                        whitespace-nowrap
+                    ">
+        
+        <iconify-icon class="group-hover:scale-125 transition-transform" icon="mingcute:tag-2-fill" width="22">
+        </iconify-icon>
+        
+        
+        <p>Tags</p>
+        
+      </a>
+      
+        
+        
+          
+          
+        
+      <a href="/./clock" class="
+                        flex flex-row items-center
+                        gap-1
+                        hover:underline
+                        hover:bg-[var(--c-20)]
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        px-2
+                        py-1
+                        my-1
+                        rounded-lg
+                        group
+                        whitespace-nowrap
+                    ">
+        
+        <iconify-icon class="group-hover:scale-125 transition-transform" icon="mingcute:time-fill" width="22">
+        </iconify-icon>
+        
+        
+      </a>
+      
+        
+        
+          
+          
+        
+      <a href="/./index" class="
+                        flex flex-row items-center
+                        gap-1
+                        hover:underline
+                        hover:bg-[var(--c-20)]
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        px-2
+                        py-1
+                        my-1
+                        rounded-lg
+                        group
+                        whitespace-nowrap
+                    ">
+        
+        <iconify-icon class="group-hover:scale-125 transition-transform" icon="mingcute:home-2-fill" width="22">
+        </iconify-icon>
+        
+        
+      </a>
+      
+    </div>
+    <!-- Icons on the right -->
+    <div class="flex flex-row items-center justify-center">
+
+      <!-- TODO: Add search icon here -->
+
+      <!-- Dark/light toggle icon -->
+      <a class="flex group p-1" title="toggle theme" id="toggle-dark">
+        <iconify-icon class="transition-transform
+                    group-hover:rotate-[45deg]
+                    group-hover:scale-125
+                    group-hover:text-[var(--c-theme)]" width="24" id="theme-icon">
+        </iconify-icon>
+      </a>
+      <!-- Icon for dropout menu on small screens -->
+      <div class="flex flex-row items-center justify-center p-1 sm:hidden">
+        <a class="w-6 h-6" aria-hidden="true" id="open-menu">
+          <iconify-icon width="24" icon="mingcute:menu-fill" class="transition-transform hover:scale-125 hover:rotate-[5deg]">
+          </iconify-icon>
+        </a>
+        <a class="w-6 h-6 hidden" aria-hidden="true" id="close-menu">
+          <iconify-icon width="24" icon="mingcute:close-circle-fill" class="transition-transform hover:scale-125 hover:rotate-[80deg]">
+          </iconify-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Dropdown menu on small screens -->
+<div id="menu-panel" class="
+        h-0
+        overflow-hidden
+        sm:hidden
+        w-full
+        z-10
+        rounded
+    ">
+  <div id="menu-content" class="
+        flex
+        flex-col
+        font-bold
+        text-xl
+        border-b-[1px]
+        relative
+        z-20
+        border-[var(--c-sep)]
+        px-2
+        py-2
+        -translate-y-full
+        transition-transform
+        duration-200
+        ">
+    
+    
+    
+    <a href="/./archives" class="
+                flex flex-row items-center
+                gap-2
+                h-12
+                hover:underline
+                hover:bg-[var(--c-20)]
+                px-3
+                py-1
+                rounded-lg
+            ">
+      <iconify-icon icon="mingcute:inbox-fill" width="22">
+      </iconify-icon>
+      <p>
+        Archives
+      </p>
+    </a>
+    
+    
+    
+    
+    <a href="/./categories" class="
+                flex flex-row items-center
+                gap-2
+                h-12
+                hover:underline
+                hover:bg-[var(--c-20)]
+                px-3
+                py-1
+                rounded-lg
+            ">
+      <iconify-icon icon="mingcute:classify-3-fill" width="22">
+      </iconify-icon>
+      <p>
+        Categories
+      </p>
+    </a>
+    
+    
+    
+    
+    <a href="/./tags" class="
+                flex flex-row items-center
+                gap-2
+                h-12
+                hover:underline
+                hover:bg-[var(--c-20)]
+                px-3
+                py-1
+                rounded-lg
+            ">
+      <iconify-icon icon="mingcute:tag-2-fill" width="22">
+      </iconify-icon>
+      <p>
+        Tags
+      </p>
+    </a>
+    
+    
+    
+    
+    <a href="/./clock" class="
+                flex flex-row items-center
+                gap-2
+                h-12
+                hover:underline
+                hover:bg-[var(--c-20)]
+                px-3
+                py-1
+                rounded-lg
+            ">
+      <iconify-icon icon="mingcute:time-fill" width="22">
+      </iconify-icon>
+      <p>
+        Clock
+      </p>
+    </a>
+    
+    
+    
+    
+    <a href="/./index" class="
+                flex flex-row items-center
+                gap-2
+                h-12
+                hover:underline
+                hover:bg-[var(--c-20)]
+                px-3
+                py-1
+                rounded-lg
+            ">
+      <iconify-icon icon="mingcute:home-2-fill" width="22">
+      </iconify-icon>
+      <p>
+        
+      </p>
+    </a>
+    
+    
+  </div>
+</div>
+
+  <main>
+    <!-- css -->
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+
+  
+<link rel="stylesheet" href="/lib/tocbot/tocbot.min.css">
+
+    <!-- toc -->
+    
+  <!-- tocbot -->
+<nav class="post-toc toc text-sm w-40 relative top-32 right-4 opacity-70 hidden lg:block" style="position: fixed !important;"></nav>
+
+
+<section class="px-6 max-w-prose mx-auto md:px-0">
+  <!-- Post header before content -->
+  <header class="py-4">
+    <div class="flex flex-col gap-2 pt-4 md:pt-6">
+      <!-- Title -->
+      <div id="article-title" class="leading-snug">
+        <p class="text-3xl font-bold text-[var(--c-100)] mb-4">Git</p>
+      </div>
+      <!-- Meta data -->
+      <div>
+        <section class="
+          flex flex-col gap-x-2 gap-y-1 text-sm text-[var(--c-100)]">
+          <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <!-- Dates -->
+            <div class="flex items-center gap-1">
+              <iconify-icon width="18" icon="mingcute:add-circle-fill" ></iconify-icon>
+              Created: <time class="w-max">2024-12-29</time>
+            </div>
+            <div class="flex items-center gap-1">
+              <iconify-icon width="18" icon="mingcute:refresh-3-fill" ></iconify-icon>
+              Edited: <time class="w-max">2025-04-07</time>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-3">
+            <!-- Author -->
+            
+
+            <!-- Word count -->
+            <span class="flex items-center gap-1">
+              <iconify-icon width="18" icon="mingcute:book-2-fill" ></iconify-icon>
+              <span>4.8k words, 18 min</span>
+            </span>
+            <!-- Categories -->
+            
+              <!-- <span class="text-gray-400">·</span> -->
+              <span class="flex flex-row items-center gap-1 group hover:underline">
+                <iconify-icon class="transition-all group-hover:scale-125 mr-0"
+                  width="18"
+                  icon="mingcute:classify-2-fill">
+                </iconify-icon>
+                <a class="article-category-link" href="/categories/Notes/">Notes</a>
+              </span>
+            
+          </div>
+        </section>
+      </div>
+      <!-- tags -->
+      <div>
+        
+<div class="flex flex-wrap gap-1">
+  
+    
+      <a href="/tags/DevOps/" 
+        class="
+          tag
+          text-sm
+          rounded-full
+          px-[5px]
+          border-[1px]
+          border-[var(--c-theme)]
+          text-[var(--c-theme)]
+          bg-[var(--c-0)]
+          dark:bg-[var(--c-0)]
+          dark:drop-shadow-none
+          hover:bg-[var(--c-theme)]
+          hover:text-[var(--c-0)]
+          dark:hover:text-[var(--c-10)]
+          dark:hover:bg-[var(--c-theme)]
+        ">
+        DevOps
+      </a>
+    
+      <a href="/tags/Code/" 
+        class="
+          tag
+          text-sm
+          rounded-full
+          px-[5px]
+          border-[1px]
+          border-[var(--c-theme)]
+          text-[var(--c-theme)]
+          bg-[var(--c-0)]
+          dark:bg-[var(--c-0)]
+          dark:drop-shadow-none
+          hover:bg-[var(--c-theme)]
+          hover:text-[var(--c-0)]
+          dark:hover:text-[var(--c-10)]
+          dark:hover:bg-[var(--c-theme)]
+        ">
+        Code
+      </a>
+    
+  
+</div>
+      </div>
+    </div>
+  </header>
+  <!-- content -->
+  <article class="post-content prose m-auto dark:prose-invert">
+    <h2 id="一、Git-基础知识">一、Git 基础知识</h2>
+<ul class="lvl-0">
+<li class="lvl-2">Git 主要用来管理代码和文件，在 Git 仓库中，每一个文件、每一行文本都是有迹可循的，任何修改都会被记录下来，所有的更改、所有的操作，都可以被追踪、都可以被复原</li>
+<li class="lvl-2"><code>.gitignore</code> 用来表示不需要 Git 管理的文件或目录</li>
+<li class="lvl-2">空文件默认不被 Git 管理，如果需要，可以在空文件夹中添加 <code>.gitkeep</code> 空文件</li>
+<li class="lvl-2">Git 会默认忽略对文件名的大小写的修改，可以在 <code>.git/config</code> 文件中，修改 <code>ignorecase = false</code></li>
+<li class="lvl-2">如果当前 Git 仓库 A 下的某个文件夹下存在另一个 Git 仓库 B（存在<code>.git</code>文件夹），那么仓库 B 文件夹会被忽略，不会被 Git 仓库 A 管理</li>
+</ul>
+<p><strong>一些概念：</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>本地仓库（repository）：本地 Git 仓库文件夹，保存有 <code>.git</code> 文件夹，记录了所有 git 操作</p>
+</li>
+<li class="lvl-2">
+<p>远程仓库（remote）：远程 Git 仓库文件夹，和本地仓库同步，具有相同的操作历史</p>
+<ul class="lvl-2">
+<li class="lvl-4">可以说，远程仓库等同于本地仓库，远程仓库就是本地仓库的线上存储</li>
+<li class="lvl-4">远程仓库和本地仓库的同步是以 “分支” 为基础的，远程和本地相互 “连接” 的分支是相同的</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>分支（branch）：一个仓库可以有多个分支，每个分支是独立的，用以保存不同的文件修改操作</p>
+<ul class="lvl-2">
+<li class="lvl-4">某个分支一般是另外一个分支的 “复制体”</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>工作区（workspace）：就是保存有 <code>.git</code> 文件夹的本地文件地址，用以更改本地 Git 仓库文件</p>
+<ul class="lvl-2">
+<li class="lvl-4">仓库是一个比较宽泛笼统的概念，可以这样理解：我在仓库的某个分支下工作（修改文件），那这里就是我的工作区</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>暂存区（Staged）：文件修改后，可以将其放到暂存区，是即将正式提交的文件</p>
+</li>
+<li class="lvl-2">
+<p>储藏区（stash）：将当前工作区中的文件恢复为原样，并把修改的内容临时保存到储藏区，储藏区的结构是一个<strong>栈</strong></p>
+</li>
+<li class="lvl-2">
+<p>一个提交（commit）：确定某次修改后，将其放入暂存区，然后将暂存区的文件进行提交</p>
+<ul class="lvl-2">
+<li class="lvl-4">远程仓库和本地仓库就是以 “提交 commit” 为单位进行同步的</li>
+<li class="lvl-4">某一个提交，代表一次确切的修改和保存</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>合并（merge）：将两个分支的文件进行合并</p>
+</li>
+<li class="lvl-2">
+<p>拉取（pull）：远程分支和本地分支进行同步，会做两件事</p>
+<ol>
+<li class="lvl-7">将远程仓库的文件拉取到本地仓库</li>
+<li class="lvl-7">将远程分支和本地连接的分支进行文件合并（merge）</li>
+</ol>
+</li>
+<li class="lvl-2">
+<p>推送（push）：将本地分支和远程分支进行同步，远程文件和本地文件达到一致</p>
+</li>
+</ul>
+<p><strong>工作区中一个文件会出现的几种状态：</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>未跟踪（untrack）：存在于 git 工作区的文件，但不在 git 的管理范围</p>
+</li>
+<li class="lvl-2">
+<p>未修改（unmodified）：与之前的文件（上一个 commit）相同的文件</p>
+</li>
+<li class="lvl-2">
+<p>已修改（modified）：与之前的文件不同的文件</p>
+</li>
+<li class="lvl-2">
+<p>已暂存（staged）：确定修改的文件，一次提交（commit）就是只提交暂存区的文件</p>
+</li>
+</ul>
+<p><strong>一次提交的文件状态历程：</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>新建文件（未追踪）、修改文件（已修改） --&gt;  确定这个文件（已暂存）  --&gt;  提交修改（变为未修改）</p>
+</li>
+</ul>
+<h2 id="二、Git-用法和命令">二、Git 用法和命令</h2>
+<h3 id="2-1-本地配置">2.1 本地配置</h3>
+<h4 id="2-1-1-SSH-密钥配置">2.1.1 SSH 密钥配置</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>生成 ssh 密钥</p>
+<ul class="lvl-2">
+<li class="lvl-4">
+<p>为防止覆盖已有的密钥文件，可以指定一个新的密钥文件名称</p>
+</li>
+<li class="lvl-4">
+<p>密钥文件一般存放在 <code>用户目录/.ssh</code> 下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮箱&quot;</span>   <span class="comment"># 生成ssh密钥，-b 4096 指定长度</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>将公钥文件内容添加到远程仓库的配置中</p>
+</li>
+<li class="lvl-2">
+<p>将本地私钥路径和远程仓库域名相对应：</p>
+<ul class="lvl-2">
+<li class="lvl-4">修改 <code>用户目录/.ssh/config</code> 文件，示例内容如下<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile C:\Users\yzz\.ssh\id_rsa</span><br><span class="line"></span><br><span class="line">Host gitlab.xxx.com</span><br><span class="line">    HostName gitlab.xxx.com</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile C:\Users\yzz\.ssh\id_rsa_gitlab</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-1-2-Git-作者信息配置">2.1.2 Git 作者信息配置</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git config --list  <span class="comment"># 查看配置信息，--gloabl 查看全局</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置全局默认 git 仓库的作者信息</span></span><br><span class="line">git config --global user.name <span class="string">&quot;xxx&quot;</span>  <span class="comment"># 配置用户名，对所有仓库生效</span></span><br><span class="line">git config --global user.email <span class="string">&quot;xxx&quot;</span>  <span class="comment"># 配置用户邮箱</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 为每个 git 项目单独配置用户名和邮箱：</span></span><br><span class="line"><span class="comment"># 在仓库目录下</span></span><br><span class="line">git config user.name <span class="string">&quot;xxx&quot;</span></span><br><span class="line">git config user.email <span class="string">&quot;xxx&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-2-基本指令">2.2 基本指令</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 克隆远程仓库到本地，会新建一个文件夹</span></span><br><span class="line">git <span class="built_in">clone</span> &lt;远程仓库http或ssh链接&gt;  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建当前目录为 git 仓库，会生成一个 .git 文件夹</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line">git pull  <span class="comment"># 拉取远程和本地连接的分支，本地 commit 记录会和远程同步</span></span><br><span class="line">git push  <span class="comment"># 推送本地分支到远程分支，远程 commit 记录会和本地同步</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">git status  <span class="comment"># 查看当前仓库的状态，如所处分支、提交信息等，-s 简略查看</span></span><br><span class="line">git add &lt;文件名&gt;  <span class="comment"># 将文件添加到暂存区，&lt;文件名&gt;为 . 表示所有文件，通配符 *.html</span></span><br><span class="line">git ls-files  <span class="comment"># 查看暂存区的文件，-s 详细查看</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># git restore 是新版的 git rm，两者作者类似</span></span><br><span class="line">git restore &lt;文件名&gt;  <span class="comment"># 将修改恢复到最新的提交的状态，--staged 从暂存区恢复指定的文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区的文件到本地仓库中</span></span><br><span class="line">git commit -m <span class="string">&quot;&lt;本次提交的注释&gt;&quot;</span>  <span class="comment"># 如果没有 -m 会进入 vim 编辑多行注释</span></span><br><span class="line"><span class="comment">## -am &quot;&lt;xxx&gt;&quot;  将已被追踪的文件的修改放到暂存区并提交，不包括未被跟踪的文件（新创建的文件）</span></span><br><span class="line"></span><br><span class="line">git <span class="built_in">log</span>  <span class="comment"># 查看提交的日志记录，--oneline 简洁查看</span></span><br><span class="line">git reflog  <span class="comment"># 查看所有操作历史记录</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退提交记录</span></span><br><span class="line">git reset HEAD^  <span class="comment"># 将仓库回退到最新提交的上一次提交，HEAD 代表最新的一次提交，可以改为某次提交的唯一ID值</span></span><br><span class="line"><span class="comment">## --soft  回退到某个版本，并且保留本地里暂存区和工作区的所有修改内容</span></span><br><span class="line"><span class="comment">## --hard  回退到某个版本，并且丢弃本地里暂弃区和工作区的修改</span></span><br><span class="line"><span class="comment">## --mixed  默认参数，回退到某个版本，只保存本地里工作区的修改内容，丢弃暂存区的修改内容</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-3-仓库">2.3 仓库</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>git remote -vv</code>  详细查看远程仓库</p>
+</li>
+<li class="lvl-2">
+<p>输出示例如下，可以这样认为：<code>origin</code> 这个关键字等同于 <code>git@github.com:yzztin/yzztin.github.io.git</code> 这个远程仓库地址，当执行 <code>git pull</code> 等命令时，默认就是 <code>origin</code> 对应的 git 仓库地址</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">origin  git@github.com:yzztin/yzztin.github.io.git (fetch)</span><br><span class="line">origin  git@github.com:yzztin/yzztin.github.io.git (push)</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>其他关于仓库的命令</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin2 &lt;远程仓库地址&gt;  <span class="comment"># 关联远程仓库</span></span><br><span class="line"></span><br><span class="line">git remote set-url origin2 &lt;新地址&gt;  <span class="comment"># 修改 origin2 对应的远程仓库地址</span></span><br><span class="line"></span><br><span class="line">git remote rename origin2 old_origin  <span class="comment"># 重命名远程仓库名</span></span><br><span class="line"></span><br><span class="line">git remote remove origin2  <span class="comment"># 删除远程仓库</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-4-branch-分支">2.4 branch 分支</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>git branch -vv</code>  详细查看本地分支和远程分支的关联关系</p>
+</li>
+<li class="lvl-2">
+<p>输出示例如下，可以理解如下信息</p>
+<ul class="lvl-2">
+<li class="lvl-4">当前正在处于 <code>hexo</code> 分支下</li>
+<li class="lvl-4">本地分支 <code>hexo</code> 和远程仓库 <code>origin</code> 的 <code>hexo</code> 分支是相连接的，本地该分支落后远程该分支两个 commit，本地最新的 commit 的注释信息是 <code>Site updated: 2024-12-16 14:10:50</code></li>
+<li class="lvl-4">本地分支 <code>main</code> 和远程仓库 <code>origin</code> 的 <code>main</code> 分支是相连接的，本地和远程该分支 commit 记录相同，该分支本地最新的 commit 注释信息是 <code>init</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* hexo      7a48463 [origin/hexo: behind 2] Site updated: 2024-12-16 14:10:50</span><br><span class="line">main      967e1a2 [origin/main] init</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>分支的其他操作：</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 切换分支，类似于 git checkout，单纯切换分支建议使用 git switch</span></span><br><span class="line">git switch &lt;分支名&gt;  </span><br><span class="line"><span class="comment">## -c 基于当前分支下新建一个新的分支并切换过去，新分支会复制当前分支的全部文件，包括未暂存和修改的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">git branch -d &lt;分支名&gt;  <span class="comment"># 删除本地分支，需要先切换到别的分支，当分支已经推送到远程后才可以直接删除，-D 强制删除</span></span><br><span class="line">git push origin --delete &lt;分支名&gt;  <span class="comment"># 删除远程分支</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支</span></span><br><span class="line">git merge &lt;分支名&gt;  <span class="comment"># 合并分支，将指定分支合并到当前正在使用的分支</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送分支到远程</span></span><br><span class="line">git push -u origin main:origin-main</span><br><span class="line"><span class="comment">## 把本地分支 main 推送给远程 origin-main 分支，如果远程仓库没有 origin-main 分支，会在远程新建分支该分支</span></span><br><span class="line"><span class="comment">## 如果没有没有指定远程分支名，默认远程分支与本地分支名相同，即 git push origin main 等同于 git push origin main:main</span></span><br><span class="line"><span class="comment">## -u 或 --set-upstream 设置远程和本地分支间的连接关系</span></span><br><span class="line"><span class="comment">## -f 强制推送，强制将远程分支的 commit 记录与本地保持一致</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取远程仓库到本地</span></span><br><span class="line">git pull origin origin-main:main  <span class="comment"># 把远程的origin-main分支拉取到本地main分支中，操作同上</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将本地分支和远程分支连接起来</span></span><br><span class="line">git branch -u orgin/dev dev  <span class="comment"># 远程的 dev 分支连接到本地的 dev 分支上</span></span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>其他概念：</p>
+<ul class="lvl-2">
+<li class="lvl-4">如果在 <code>分支1</code> 中修改了代码，但未提交，就切换到的 <code>分支2</code> 上，那么会把未修改的代码也带到 <code>分支2</code> 中，即 <code>分支2</code> 会展示 <code>分支1</code> 的代码（只有 <code>分支1</code> 和 <code>分支2</code> 处同一个 commit 才会这样，如果不是同一个 commit，会出现错误）</li>
+<li class="lvl-4">如果不想将 <code>分支1</code> 的代码带到 <code>分支2</code> 中，也不想立刻暂存或提交代码，可以先通过 <code>git stash</code> 临时保存到储藏区</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-stash-储藏">2.5 stash 储藏</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>储藏区是一个栈结构，用以临时保存工作区的修改内容</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git stash  <span class="comment"># 保存当前工作区的修改内容到储藏区</span></span><br><span class="line"></span><br><span class="line">git stash list  <span class="comment"># 查看储藏区的记录</span></span><br><span class="line"></span><br><span class="line">git stash show 0  <span class="comment"># 查看栈顶的储藏记录的详细信息</span></span><br><span class="line"></span><br><span class="line">git stash pop  <span class="comment"># 恢复最近一次储藏的修改内容，并删除该记录</span></span><br><span class="line"></span><br><span class="line">git stash push &lt;文件&gt;  <span class="comment"># 将指定文件保存到储藏区</span></span><br><span class="line"></span><br><span class="line">gi stash drop 0  <span class="comment"># 删除栈顶的储藏记录</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-6-diff-查看差异">2.6 diff 查看差异</h3>
+<blockquote>
+<p>一般在 IDE 工具中更加直观地查看文件之间的差异，而不是通过下面地命令</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git diff  <span class="comment"># 可以查看工作区、暂存区、本地仓库、不同版本(提交)、不同分支之间的差异</span></span><br><span class="line"><span class="comment"># 默认比较的是工作区和暂存区之间的差异</span></span><br><span class="line"></span><br><span class="line">git diff HEAD  <span class="comment"># 比较**工作区**和最新一次提交之间的差异</span></span><br><span class="line">git diff --cached  <span class="comment"># 比较**暂存区**和最新一次提交之间的差异</span></span><br><span class="line">git diff &lt;提交ID-1&gt; &lt;提交ID-2&gt; &lt;文件名&gt; <span class="comment"># 比较两次提交之间的差异，有 &lt;文件名&gt; 则表示只查看该文件的差异</span></span><br><span class="line">git diff &lt;分支名1&gt; &lt;分支名2&gt;  <span class="comment"># 查看两个分支之间的差异</span></span><br><span class="line"></span><br><span class="line">git diff HEAD^ HEAD  <span class="comment"># 用 HEAD（最新提交）比较 HEAD^（最新提交的上一个提交）</span></span><br><span class="line">git diff HEAD HEAD^  <span class="comment"># 用 HEAD^（最新提交的上一个提交）比较 HEAD（最新提交）</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-7-tag-标签">2.7 tag 标签</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>标签是一种标记，对某个分支的某个提交的标记，通过标签可以方便地找到特定的提交记录</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">git tag  <span class="comment"># 查看标签列表</span></span><br><span class="line"></span><br><span class="line">git tag &lt;标签名&gt;  <span class="comment"># 简易标签，为当前分支的最新提交创建一个标签名，如 git tag v1.0</span></span><br><span class="line">git tag -a &lt;标签名&gt; -m &lt;标签注释信息&gt;  <span class="comment"># 详细标签，如，git tag -a v1.0.0 -m &quot;发布新版本&quot;</span></span><br><span class="line">git tag &lt;标签名&gt; &lt;commit <span class="built_in">hash</span> 值&gt;  <span class="comment"># 为某个特定的 commit 打标签</span></span><br><span class="line"></span><br><span class="line">git push origin &lt;标签名&gt;  <span class="comment"># 推送标签到远程</span></span><br><span class="line"></span><br><span class="line">git checkout &lt;标签名称&gt;  <span class="comment"># 切换到指定标签</span></span><br><span class="line"></span><br><span class="line">git tag -d &lt;标签名称&gt;  <span class="comment"># 删除本地标签</span></span><br><span class="line">git push origin --delete &lt;标签名称&gt;  <span class="comment"># 删除远程的标签</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-8-rebase-变基">2.8 rebase 变基</h3>
+<blockquote>
+<p>rebase 变基，最常用来处理提交记录的合并，可以将多个提交记录合并成一条直线的提交记录</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span>  <span class="comment"># 查看 commit 日志</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 找到想要保留的最早的 commit 的前一个的 hash值</span></span><br><span class="line">git rebase -i &lt;<span class="built_in">hash</span>值&gt;  <span class="comment"># 进入到交互模式的 rebase </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 界面示例如下，commit A 是想要保留的一次提交，所以上面的 hash 值就应该是 commit A 前一次的值</span></span><br><span class="line">pick d9623b0 commit A (最早的一个commit)</span><br><span class="line">pick c50221f commit B</span><br><span class="line">pick 73deeed commit C (最新的一个commit)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将前面的 pick 修改为 f 或者 s</span></span><br><span class="line"><span class="comment"># 使用 f 会自动使用 commit A 的提交信息，使用 s 会要求重新写 commit 信息</span></span><br><span class="line">pick d9623b0 commit A</span><br><span class="line">f c50221f commit B</span><br><span class="line">f 73deeed commit C</span><br><span class="line"></span><br><span class="line"><span class="comment"># 变基处理到第一个 commit </span></span><br><span class="line">git rebase -i --root</span><br></pre></td></tr></table></figure>
+<h3 id="2-9-合并冲突">2.9 合并冲突</h3>
+<blockquote>
+<p>解决冲突就是人工手动的一个一个去查看解决，将冲突的代码改成自己需要的代码
+一般在 IDE 工具中解决冲突更加直观方便</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>合并冲突是指两个分支修改了同一文件，导致 git 无法自动合并，需要手动解决冲突</p>
+</li>
+<li class="lvl-2">
+<p>产生合并冲突后，会在有冲突的文件中用 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;，=======，&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> 标记出不同分支的内容</p>
+</li>
+<li class="lvl-2">
+<p>完成冲突解决后，需要手动执行 <code>git commit -m &quot;xxx&quot;</code> 提交修改</p>
+</li>
+</ul>
+<h2 id="三、Git-常见实际场景示例">三、Git 常见实际场景示例</h2>
+<h3 id="3-1-一次代码修改和-commit-提交，并合并到-main-分支">3.1 一次代码修改和 commit 提交，并合并到 main 分支</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在正式生产环境中，远程仓库的 main 分支一般是不可以随便修改的（受保护的），就需要新建一个分支，在该分支上做修改，然后请求合并到 main 分支</p>
+</li>
+</ul>
+<blockquote>
+<p>如果已经在 <code>main</code> 分支进行了修改，可以将修改后的 <code>main</code> 分支提交后合并到其他分支，再推送其他分支</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">git pull  <span class="comment"># 每次更改代码前，先使用 pull 命令拉取资源，尽量避免冲突</span></span><br><span class="line"></span><br><span class="line">git switch -c yzz-dev  <span class="comment"># 基于当前分支（main）新建一个分支，名称为 yzz-dev，并切换到该分支，此时仅在本地新建了分支</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 修改文件</span></span><br><span class="line"></span><br><span class="line">git add .  <span class="comment"># 将所有修改的文件添加到暂存区</span></span><br><span class="line">git commit -m <span class="string">&quot;xxx&quot;</span>  <span class="comment"># 提交修改，-m 后面是注释信息</span></span><br><span class="line">git push origin yzz-dev  <span class="comment"># 将本地分支 yzz-dev 推送到远程，会在远程新建分支</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 此时进入到远程仓库（如Gitlab）项目中，发起合并请求</span></span><br><span class="line"><span class="comment">## 如果出现合并冲突，无法执行合并，则需要手动解决冲突，解决完冲突后，再次提交和推送</span></span><br><span class="line"></span><br><span class="line">git merge main  <span class="comment"># 将 main 分支合并到当前分支（yzz-dev）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 手动解决冲突</span></span><br><span class="line"></span><br><span class="line">git commit -m <span class="string">&quot;xxx&quot;</span></span><br><span class="line">git push origin yzz-dev </span><br><span class="line"></span><br><span class="line"><span class="comment">## 合并到 main 分支</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-2-Github-让自己-Fork-的项目变为最新的，或指定远程某个分支、标签合并到本地">3.2 Github 让自己 Fork 的项目变为最新的，或指定远程某个分支、标签合并到本地</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 在本地 Forked 仓库目录下</span></span><br><span class="line"></span><br><span class="line">git remote add dify https://github.com/langgenius/dify.git  <span class="comment"># 添加原项目仓库地址，命名为 dify</span></span><br><span class="line">git remote -vv  <span class="comment"># 确认 dify 远程仓库已成功添加</span></span><br><span class="line"></span><br><span class="line">git fetch dify  <span class="comment"># 获取 dify 仓库的最新代码</span></span><br><span class="line"></span><br><span class="line">git merge dify/main  <span class="comment"># 将远程仓库的 main 分支合并到本地当前分支中</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 远程标签的操作</span></span><br><span class="line"></span><br><span class="line">git fetch dify --tags  <span class="comment"># 拉取标签</span></span><br><span class="line"></span><br><span class="line">git ls-remote --tags dify  <span class="comment"># 查看本地拉取到的标签列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据标签签出分支</span></span><br><span class="line"><span class="comment"># git checkout &lt;上面看到的标签名&gt; &lt;本地需要新建的分支名&gt;</span></span><br><span class="line">git checkout refs/tags/0.11.1 -b dify-11.1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="3-3-处理无意义的提交记录，或修改提交记录">3.3 处理无意义的提交记录，或修改提交记录</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>情况1：如果只需要修改最新的一次提交</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 先直接修改工作区的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将修改后的文件放入暂存区</span></span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新提交，--amend 参数会修改最新的一次提交</span></span><br><span class="line">git commit --amend -m <span class="string">&quot;注释信息&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送到远程</span></span><br><span class="line">git push  <span class="comment"># -f 强制推送，强制远程仓库的 commit 记录与本地保持一致</span></span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>情况2：如果需要修改之前的提交记录，可以使用 rebase 命令</p>
+</li>
+</ul>
+<h3 id="3-4-某个文件已经推送到远程仓库，但现在不需要-git-管理该文件了">3.4 某个文件已经推送到远程仓库，但现在不需要 git 管理该文件了</h3>
+<blockquote>
+<p>如果某个文件已经被提交到了远程仓库中，再把文件名写入到 <code>.gitignore</code> 是不会生效的，需要手动删除这个文件（不用在工作区中删除）</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从本地仓库中移除 .vscode .idea 这两个文件，但没有物理上删除文件</span></span><br><span class="line">git <span class="built_in">rm</span> -r --cached .vscode .idea</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将需要忽略到远程仓库的文件夹名称写到 .gitignore 文件中，如下</span></span><br><span class="line">.vscode/</span><br><span class="line">.idea/</span><br><span class="line"></span><br><span class="line">git add .gitignore</span><br><span class="line">git commit -m <span class="string">&quot;xxx&quot;</span></span><br><span class="line">git push origin yzz-dev</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-拉取远程的非主分支到本地">3.5 拉取远程的非主分支到本地</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch -c dev origin/dev  <span class="comment"># 新建一个分支dev，并追踪到远程的dev分支</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-6-在多个提交记录中，只想要取其中某一个（cherry-pick）">3.6 在多个提交记录中，只想要取其中某一个（cherry-pick）</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看另一个分支上的你需要的 commit ID</span></span><br><span class="line">git <span class="built_in">log</span> dev</span><br><span class="line"></span><br><span class="line">git cherry-pick &lt;commit ID&gt;  <span class="comment"># 这个 commit 会加到当前分支上</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 存在冲突就手动解决</span></span><br><span class="line"></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<h2 id="四、Git-commit-注释信息规范">四、Git commit 注释信息规范</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在代码提交的 commit 中，通常使用一些标签来标识提交的目的或类型，以便更好地理解和管理代码的变更。以下是一些常见的标签及其代表的含义：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ENH（Enhancement）： 表示增强或改进功能的提交。通常用于描述对现有功能的改进或增强。</span><br><span class="line">DOC（Documentation）： 表示文档相关的提交。这可能包括更新文档、添加注释、撰写使用手册等。</span><br><span class="line">REF（Refactor）： 表示重构代码的提交。重构是指对现有代码进行修改，以改进其结构、提高可读性、降低复杂度，但并不改变代码功能的行为。</span><br><span class="line">FEAT（Feature）： 表示新功能的提交。通常用于描述对代码库新增功能的修改或添加。</span><br><span class="line">BUG（Bugfix）： 表示修复 Bug 的提交。用于描述对现有代码中的错误或缺陷进行修复的修改。</span><br><span class="line">BLD（Build）： 表示与构建系统相关的提交。这可能包括修改构建脚本、构建配置文件、依赖管理等。</span><br><span class="line">TST（Test）： 表示与测试相关的提交。这可能包括添加、修改或删除测试用例，以及与测试框架、测试工具相关的修改。</span><br><span class="line">CHORE: 用于非业务逻辑的维护性工作，比如配置文件的调整。</span><br></pre></td></tr></table></figure>
+<h2 id="参考链接">参考链接</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Git官方文档：<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">https://git-scm.com/book/zh/v2</a></p>
+</li>
+<li class="lvl-2">
+<p>常用命令：<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</a></p>
+</li>
+<li class="lvl-2">
+<p>VS Code中使用Git：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/514135557">https://zhuanlan.zhihu.com/p/514135557</a></p>
+</li>
+<li class="lvl-2">
+<p>Git撤回已经push代码：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/arxive/p/11146637.html">https://www.cnblogs.com/arxive/p/11146637.html</a></p>
+</li>
+<li class="lvl-2">
+<p>gitlab：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/95991a646f72">https://www.jianshu.com/p/95991a646f72</a></p>
+</li>
+<li class="lvl-2">
+<p>gitlab和GIt：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/183092443">https://zhuanlan.zhihu.com/p/183092443</a></p>
+</li>
+<li class="lvl-2">
+<p>同时配置Github和Gitlab的不同SSH密钥：<a target="_blank" rel="noopener" href="https://kangzhiheng.top/post/11-more-ssh-in-one-laptop/">https://kangzhiheng.top/post/11-more-ssh-in-one-laptop/</a></p>
+</li>
+<li class="lvl-2">
+<p>指令的解释：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0rK9TJxMnoYYhtdy1kcvIg">https://mp.weixin.qq.com/s/0rK9TJxMnoYYhtdy1kcvIg</a></p>
+</li>
+<li class="lvl-2">
+<p>在线学习平台：<a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">https://learngitbranching.js.org/?locale=zh_CN</a></p>
+</li>
+<li class="lvl-2">
+<p>变基：<a target="_blank" rel="noopener" href="https://waynerv.com/posts/git-rebase-intro/">https://waynerv.com/posts/git-rebase-intro/</a></p>
+</li>
+</ul>
+
+  </article>
+
+  <!-- prev and next -->
+  <div class="flex justify-between mt-4 pt-4
+    border-t border-[var(--c-sep)] text-sm
+    gap-2 text-[var(--c-50)]
+  ">
+    <div>
+      
+        <a href="/2024/12/30/Docker/"
+          class="
+            transition-all
+            flex justify-center
+            hover:-translate-x-1
+            hover:text-[var(--c-80)]
+          ">
+          <iconify-icon width="20" icon="mingcute:left-fill" data-inline="false">
+          </iconify-icon>
+          Docker
+        </a>
+      
+    </div>
+    <div>
+      
+        <a href="/2024/12/23/Markdown/"
+          class="
+            flex 
+            justify-center
+            hover:translate-x-1 
+            transition-transform
+            hover:text-[var(--c-100)]
+          "
+        >
+          Markdown
+          <iconify-icon width="20" icon="mingcute:right-fill" data-inline="false"></iconify-icon>
+        </a>
+      
+    </div>
+  </div>
+
+  <!-- comment -->
+  <div class="article-comments mt-12">
+    
+
+  </div>
+</section>
+<!-- js inspect -->
+
+<script src="/lib/clipboard.min.js"></script>
+
+
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  $(document).ready(() => {
+    const maraidConfig = {
+      theme: "default",
+      logLevel: 3,
+      flowchart: { curve: "linear" },
+      gantt: { axisFormat: "%m/%d/%Y" },
+      sequence: { actorMargin: 50 },
+    };
+    mermaid.initialize(maraidConfig);
+  });
+</script>
+
+
+
+<script src="/lib/fancybox/fancybox.umd.min.js"></script>
+
+<script>
+  $(document).ready(() => {
+    $('.post-content').each(function(i){
+      $(this).find('img').each(function(){
+        if ($(this).parent().hasClass('fancybox') || $(this).parent().is('a')) return;
+        var alt = this.alt;
+        var title = this.title;
+        if (alt) $(this).after('<span class="fancybox-alt">' + alt + '</span>');
+        else if (title) $(this).after('<span class="fancybox-title">' + title + '</span>');
+        $(this).wrap('<a class="fancybox-img" href="' + this.src + '" data-fancybox=\"gallery\" data-caption="' + title + '"></a>')
+      });
+      $(this).find('.fancybox').each(function(){
+        $(this).attr('rel', 'article' + i);
+      });
+    });
+
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        // options
+    })
+  })
+</script>
+
+<!-- tocbot begin -->
+
+<script src="/lib/tocbot/tocbot.min.js"></script>
+
+<script>
+  $(document).ready(() => {
+      tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.post-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.post-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3',
+        // For headings inside relative or absolute positioned containers within content.
+        hasInnerContainers: true,
+    });
+  })
+</script>
+<!-- tocbot end -->
+
+  </main>
+  <footer class="flex flex-col mt-18 mb-12 items-center
+  text-[var(--c-50)] text-sm">
+  <div class="flex flex-row items-center my-12">
+    
+    
+        
+        
+            
+            
+        
+        <a class="
+            hover:text-[var(--c-theme)]
+            hover:bg-[var(--c-20)]
+            rounded-lg
+            p-2
+            my-1
+            flex flex-row items-center
+            group" title="Github" target="_blank" rel="noopener" href="https://www.github.com/yzztin">
+            <iconify-icon width="28" icon="mingcute:github-fill"></iconify-icon>
+        </a>
+    
+        
+        
+            
+            
+        
+        <a class="
+            hover:text-[var(--c-theme)]
+            hover:bg-[var(--c-20)]
+            rounded-lg
+            p-2
+            my-1
+            flex flex-row items-center
+            group" title="Twitter" target="_blank" rel="noopener" href="https://www.twitter.com/yzztin">
+            <iconify-icon width="28" icon="mingcute:social-x-fill"></iconify-icon>
+        </a>
+    
+
+  </div>
+  <!-- busuanzi -->
+  <div class="mb-6">
+    
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- Busuanzi Analytics -->
+<div class="flex flex-col items-center mb-2">
+  <div class="flex flex-row items-center">
+    <iconify-icon width="16" icon="ic:round-person" width="18"></iconify-icon>
+    <span class="mr-1"> Visitors: </span>
+    <span id="busuanzi_value_site_uv"></span>
+  </div>
+  <div class="flex flex-row items-center">
+    <iconify-icon width="16" icon="carbon:view-filled" width="18"></iconify-icon>
+    <span class="mx-1"> Page Views:</span>
+    <span id="busuanzi_value_site_pv"></span>
+  </div>
+</div>
+<!-- End Busuanzi Analytics -->
+
+
+  </div>
+  <!-- copyright -->
+  <div class="flex flex-row items-center gap-2">
+    <a class="hover:underline"
+      target="_blank"
+      href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    >
+      CC BY-NC-SA 4.0
+    </a>
+    <span>© 2023-2024</span>
+    <a class="hover:underline"
+    href="https://github.com/yzztin" 
+    target="_blank" 
+    rel="noopener noreferrer">Yzztin</a>
+  </div>
+  <!-- powered by -->
+  <div class="flex items-center gap-1">
+    <span>Powered by</span>
+    <a class="hover:underline" 
+    href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+    <span>&</span>
+    <a href="https://github.com/chen-yingfa/hexo-theme-fengye" 
+    class="hover:underline"
+    target="_blank"
+      rel="noopener noreferrer"
+      >
+      Fengye
+    </a>
+  </div>
+
+</footer>
+
+  <div class="
+    back-to-top
+    fixed right-6
+    z-1024
+    -bottom-20
+    rounded-lg
+    font-bold
+    py-1 px-2
+    text-[var(--c-80)]
+    bg-[var(--c-20)]
+    cursor-pointer
+    text-center
+    drop-shadow-md
+  ">
+    <span class="flex justify-center items-center text-sm">
+      <span id="scrollpercent"><span>0</span> %</span>
+      <iconify-icon width="18" icon="mingcute:arrow-to-up-fill" id="go-top"></iconify-icon>
+    </span>
+  </div>
+  
+<script src="/js/main.js"></script>
+
+
+  <div class="fixed top-0 bottom-0 left-0 right-0 pointer-events-none print:hidden" id="maple"></div>
+</body>
+
+</html>

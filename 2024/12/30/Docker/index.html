@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="author" content="yzz">
+
+
+  <meta name="subtitle" content="from yzztin">
+
+
+  <meta name="description" content="A blog for notes, thinking and life.">
+
+
+
+<title>Docker | Yzz&#39;s Blog</title>
+
+
+
+<link rel="icon" href="/images/favicon-32x32.ico">
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/css/search.css">
+
+
+
+<script src="/lib/jquery.min.js"></script>
+
+
+<script src="/lib/iconify-icon.min.js"></script>
+
+
+<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+  };
+</script>
+
+<script>
+  (function () {
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+    if (setting === "dark" || (prefersDark && setting !== "light"))
+      document.documentElement.classList.toggle("dark", true);
+    let isDark = document.documentElement.classList.contains("dark");
+  })();
+
+  $(document).ready(function () {
+    // init icon
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = document.documentElement.classList.contains("dark");
+    $("#theme-icon").attr("icon", isDark ? "ic:round-dark-mode" : "ic:round-light-mode");
+
+    function toggleGiscusTheme() {
+      const isDark = document.documentElement.classList.contains("dark");
+      const giscusFrame = document.querySelector("iframe.giscus-frame");
+      if (giscusFrame) {
+        giscusFrame.contentWindow.postMessage(
+          {
+            giscus: {
+              setConfig: {
+                theme: isDark ? "dark" : "light",
+              },
+            },
+          },
+          "https://giscus.app"
+        );
+      }
+    }
+
+
+    // toggle dark mode
+    function toggleDark() {
+      let isDark = document.documentElement.classList.contains("dark");
+      const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+      isDark = !isDark;
+      document.documentElement.classList.toggle("dark", isDark);
+      $("#theme-icon").attr("icon", isDark ? "ic:round-dark-mode" : "ic:round-light-mode");
+      if (prefersDark === isDark) {
+        localStorage.setItem("hexo-color-scheme", "auto");
+      } else {
+        localStorage.setItem("hexo-color-scheme", isDark ? "dark" : "light");
+      }
+      toggleGiscusTheme();
+    }
+    $("#toggle-dark").click(toggleDark);
+
+    // listen dark mode change
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+        if (setting === "auto") {
+          document.documentElement.classList.toggle("dark", e.matches);
+          $("#theme-icon").attr(
+            "icon",
+            e.matches ? "ic:round-dark-mode" : "ic:round-light-mode"
+          );
+          toggleGiscusTheme();
+        }
+      });
+  });
+</script>
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body 
+  class="
+    bg-[var(--c-0)]
+    text-[var(--c-80)]
+  ">
+  <!-- The navigation bar -->
+<header class="
+    flex flex-row items-center
+    w-full
+    pr-4
+    z-10
+    border-b-[1px]
+    border-b-[var(--c-border)]
+    dark:bg-[var(--c-0)]
+    dark:border-b-[var(--c-0)]
+    gap-2
+    h-[var(--h-header)]
+    text-[var(--c-80)]
+">
+  <!-- Left part -->
+  <div class="overflow-hidden h-full flex flex-row items-center">
+    <!-- Site Title on the top left -->
+    <a href="/" class="
+            whitespace-nowrap
+            text-2xl
+            text-[var(--c-theme)]
+            hover:text-[var(--c-theme)]
+            pl-4
+            font-black
+            bg-gradient-to-r from-cyan-500
+            to-blue-500 bg-clip-text text-transparent
+          ">
+      Yzz&#39;s Blog
+    </a>
+  </div>
+  <!-- Div for pushing items to both sides -->
+  <div class="flex-1"></div>
+  <!-- Right part -->
+  <div class="flex flex-row items-center z-20 h-full">
+    <!-- Page links -->
+    <div class="hidden sm:flex flex-row h-full">
+      
+        
+        
+          
+          
+        
+      <a href="/./archives" class="
+                        flex flex-row items-center
+                        gap-1
+                        hover:underline
+                        hover:bg-[var(--c-20)]
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        px-2
+                        py-1
+                        my-1
+                        rounded-lg
+                        group
+                        whitespace-nowrap
+                    ">
+        
+        <iconify-icon class="group-hover:scale-125 transition-transform" icon="mingcute:inbox-fill" width="22">
+        </iconify-icon>
+        
+        
+        <p>Archives</p>
+        
+      </a>
+      
+        
+        
+          
+          
+        
+      <a href="/./categories" class="
+                        flex flex-row items-center
+                        gap-1
+                        hover:underline
+                        hover:bg-[var(--c-20)]
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        px-2
+                        py-1
+                        my-1
+                        rounded-lg
+                        group
+                        whitespace-nowrap
+                    ">
+        
+        <iconify-icon class="group-hover:scale-125 transition-transform" icon="mingcute:classify-3-fill" width="22">
+        </iconify-icon>
+        
+        
+        <p>Categories</p>
+        
+      </a>
+      
+        
+        
+          
+          
+        
+      <a href="/./tags" class="
+                        flex flex-row items-center
+                        gap-1
+                        hover:underline
+                        hover:bg-[var(--c-20)]
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        px-2
+                        py-1
+                        my-1
+                        rounded-lg
+                        group
+                        whitespace-nowrap
+                    ">
+        
+        <iconify-icon class="group-hover:scale-125 transition-transform" icon="mingcute:tag-2-fill" width="22">
+        </iconify-icon>
+        
+        
+        <p>Tags</p>
+        
+      </a>
+      
+        
+        
+          
+          
+        
+      <a href="/./clock" class="
+                        flex flex-row items-center
+                        gap-1
+                        hover:underline
+                        hover:bg-[var(--c-20)]
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        px-2
+                        py-1
+                        my-1
+                        rounded-lg
+                        group
+                        whitespace-nowrap
+                    ">
+        
+        <iconify-icon class="group-hover:scale-125 transition-transform" icon="mingcute:time-fill" width="22">
+        </iconify-icon>
+        
+        
+      </a>
+      
+        
+        
+          
+          
+        
+      <a href="/./index" class="
+                        flex flex-row items-center
+                        gap-1
+                        hover:underline
+                        hover:bg-[var(--c-20)]
+                        hover:text-[var(--c-theme)]
+                        transition-all
+                        px-2
+                        py-1
+                        my-1
+                        rounded-lg
+                        group
+                        whitespace-nowrap
+                    ">
+        
+        <iconify-icon class="group-hover:scale-125 transition-transform" icon="mingcute:home-2-fill" width="22">
+        </iconify-icon>
+        
+        
+      </a>
+      
+    </div>
+    <!-- Icons on the right -->
+    <div class="flex flex-row items-center justify-center">
+
+      <!-- TODO: Add search icon here -->
+
+      <!-- Dark/light toggle icon -->
+      <a class="flex group p-1" title="toggle theme" id="toggle-dark">
+        <iconify-icon class="transition-transform
+                    group-hover:rotate-[45deg]
+                    group-hover:scale-125
+                    group-hover:text-[var(--c-theme)]" width="24" id="theme-icon">
+        </iconify-icon>
+      </a>
+      <!-- Icon for dropout menu on small screens -->
+      <div class="flex flex-row items-center justify-center p-1 sm:hidden">
+        <a class="w-6 h-6" aria-hidden="true" id="open-menu">
+          <iconify-icon width="24" icon="mingcute:menu-fill" class="transition-transform hover:scale-125 hover:rotate-[5deg]">
+          </iconify-icon>
+        </a>
+        <a class="w-6 h-6 hidden" aria-hidden="true" id="close-menu">
+          <iconify-icon width="24" icon="mingcute:close-circle-fill" class="transition-transform hover:scale-125 hover:rotate-[80deg]">
+          </iconify-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Dropdown menu on small screens -->
+<div id="menu-panel" class="
+        h-0
+        overflow-hidden
+        sm:hidden
+        w-full
+        z-10
+        rounded
+    ">
+  <div id="menu-content" class="
+        flex
+        flex-col
+        font-bold
+        text-xl
+        border-b-[1px]
+        relative
+        z-20
+        border-[var(--c-sep)]
+        px-2
+        py-2
+        -translate-y-full
+        transition-transform
+        duration-200
+        ">
+    
+    
+    
+    <a href="/./archives" class="
+                flex flex-row items-center
+                gap-2
+                h-12
+                hover:underline
+                hover:bg-[var(--c-20)]
+                px-3
+                py-1
+                rounded-lg
+            ">
+      <iconify-icon icon="mingcute:inbox-fill" width="22">
+      </iconify-icon>
+      <p>
+        Archives
+      </p>
+    </a>
+    
+    
+    
+    
+    <a href="/./categories" class="
+                flex flex-row items-center
+                gap-2
+                h-12
+                hover:underline
+                hover:bg-[var(--c-20)]
+                px-3
+                py-1
+                rounded-lg
+            ">
+      <iconify-icon icon="mingcute:classify-3-fill" width="22">
+      </iconify-icon>
+      <p>
+        Categories
+      </p>
+    </a>
+    
+    
+    
+    
+    <a href="/./tags" class="
+                flex flex-row items-center
+                gap-2
+                h-12
+                hover:underline
+                hover:bg-[var(--c-20)]
+                px-3
+                py-1
+                rounded-lg
+            ">
+      <iconify-icon icon="mingcute:tag-2-fill" width="22">
+      </iconify-icon>
+      <p>
+        Tags
+      </p>
+    </a>
+    
+    
+    
+    
+    <a href="/./clock" class="
+                flex flex-row items-center
+                gap-2
+                h-12
+                hover:underline
+                hover:bg-[var(--c-20)]
+                px-3
+                py-1
+                rounded-lg
+            ">
+      <iconify-icon icon="mingcute:time-fill" width="22">
+      </iconify-icon>
+      <p>
+        Clock
+      </p>
+    </a>
+    
+    
+    
+    
+    <a href="/./index" class="
+                flex flex-row items-center
+                gap-2
+                h-12
+                hover:underline
+                hover:bg-[var(--c-20)]
+                px-3
+                py-1
+                rounded-lg
+            ">
+      <iconify-icon icon="mingcute:home-2-fill" width="22">
+      </iconify-icon>
+      <p>
+        
+      </p>
+    </a>
+    
+    
+  </div>
+</div>
+
+  <main>
+    <!-- css -->
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+
+  
+<link rel="stylesheet" href="/lib/tocbot/tocbot.min.css">
+
+    <!-- toc -->
+    
+  <!-- tocbot -->
+<nav class="post-toc toc text-sm w-40 relative top-32 right-4 opacity-70 hidden lg:block" style="position: fixed !important;"></nav>
+
+
+<section class="px-6 max-w-prose mx-auto md:px-0">
+  <!-- Post header before content -->
+  <header class="py-4">
+    <div class="flex flex-col gap-2 pt-4 md:pt-6">
+      <!-- Title -->
+      <div id="article-title" class="leading-snug">
+        <p class="text-3xl font-bold text-[var(--c-100)] mb-4">Docker</p>
+      </div>
+      <!-- Meta data -->
+      <div>
+        <section class="
+          flex flex-col gap-x-2 gap-y-1 text-sm text-[var(--c-100)]">
+          <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <!-- Dates -->
+            <div class="flex items-center gap-1">
+              <iconify-icon width="18" icon="mingcute:add-circle-fill" ></iconify-icon>
+              Created: <time class="w-max">2024-12-30</time>
+            </div>
+            <div class="flex items-center gap-1">
+              <iconify-icon width="18" icon="mingcute:refresh-3-fill" ></iconify-icon>
+              Edited: <time class="w-max">2025-04-07</time>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-3">
+            <!-- Author -->
+            
+
+            <!-- Word count -->
+            <span class="flex items-center gap-1">
+              <iconify-icon width="18" icon="mingcute:book-2-fill" ></iconify-icon>
+              <span>3.1k words, 11 min</span>
+            </span>
+            <!-- Categories -->
+            
+              <!-- <span class="text-gray-400">·</span> -->
+              <span class="flex flex-row items-center gap-1 group hover:underline">
+                <iconify-icon class="transition-all group-hover:scale-125 mr-0"
+                  width="18"
+                  icon="mingcute:classify-2-fill">
+                </iconify-icon>
+                <a class="article-category-link" href="/categories/Notes/">Notes</a>
+              </span>
+            
+          </div>
+        </section>
+      </div>
+      <!-- tags -->
+      <div>
+        
+<div class="flex flex-wrap gap-1">
+  
+    
+      <a href="/tags/DevOps/" 
+        class="
+          tag
+          text-sm
+          rounded-full
+          px-[5px]
+          border-[1px]
+          border-[var(--c-theme)]
+          text-[var(--c-theme)]
+          bg-[var(--c-0)]
+          dark:bg-[var(--c-0)]
+          dark:drop-shadow-none
+          hover:bg-[var(--c-theme)]
+          hover:text-[var(--c-0)]
+          dark:hover:text-[var(--c-10)]
+          dark:hover:bg-[var(--c-theme)]
+        ">
+        DevOps
+      </a>
+    
+  
+</div>
+      </div>
+    </div>
+  </header>
+  <!-- content -->
+  <article class="post-content prose m-auto dark:prose-invert">
+    <h2 id="一、Docker-基本概念">一、Docker 基本概念</h2>
+<ul class="lvl-0">
+<li class="lvl-2">Docker是一个用于构建（build）、运行（run）、传送（share）应用程序的平台。</li>
+<li class="lvl-2">Docker 使用 Client-Server 架构模式
+<ul class="lvl-2">
+<li class="lvl-4">运行容器、存储镜像的，就是服务端</li>
+<li class="lvl-4">执行 docker 命令的，就是客户端</li>
+<li class="lvl-4">一般客户端和服务端都是运行在同一台主机上</li>
+</ul>
+</li>
+<li class="lvl-2">镜像（image）：是一个只读的模板，可以用来创建容器</li>
+<li class="lvl-2">容器（container）：是Docker的运行实例，提供一个独立的可移植的环境，可以在该环境中运行应用程序</li>
+<li class="lvl-2">容器化（containerization）：将应用程序打包成容器，然后在容器中运行应用程序的过程。
+<ul class="lvl-2">
+<li class="lvl-4">使用 Dockerfile 构建镜像、使用镜像创建和运行容器</li>
+</ul>
+</li>
+<li class="lvl-2">Dockerfile：用以构建镜像的代码文件，包括应用程序执行的所有命令，即各种依赖、配置环境和运行应用程序需要的全部内容
+<ul class="lvl-2">
+<li class="lvl-4">一般包括：精简版的操作系统、运行时的环境（如NodeJs、Java）、应用程序（如jar包）、应用程序第三方依赖库、应用程序配置文件、环境变量等等</li>
+</ul>
+</li>
+<li class="lvl-2">容器是由镜像创建的，通过docker上传和下载的都是镜像，要想运行程序，就要先通过镜像创建容器后再去运行。 镜像就相当于是一个 <code>类</code> ，而容器就是<code>对类的实例化</code></li>
+<li class="lvl-2">Docker和虚拟机的区别：
+<ul class="lvl-2">
+<li class="lvl-4">虚拟机：通过<strong>虚拟化技术</strong>将 一个物理服务器分为多个独立且完整的虚拟机，各个虚拟机之间是互相隔离的，每个虚拟机都需要消耗大量的系统资源（CPU、硬盘等）</li>
+<li class="lvl-4">docker容器：是一种虚拟化技术，和虚拟机类似，是一个独立的环境，可以在环境里运行应用程序，并不需要运行完整的操作系统，而是建立在原操作系统之上启动。docker只是容器技术的一种实现，是一个容器化的解决方案和平台。</li>
+<li class="lvl-4"><img src="/../images/Docker/image-1.png" alt="Docker和虚拟机的区别" loading="lazy"></li>
+</ul>
+</li>
+</ul>
+<h2 id="二、Docker-命令">二、Docker 命令</h2>
+<h3 id="2-1-基本命令">2.1 基本命令</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">docker search &lt;镜像名&gt;  <span class="comment"># 从 dockerhub 上搜索镜像</span></span><br><span class="line"></span><br><span class="line">docker pull ubuntu:12.04 <span class="comment"># 从 hub.docker.com 下载一个 Ubuntu 12.04 操作系统的镜像</span></span><br><span class="line">docker pull dl.dockerpool.com:5000/ubuntu:12.04  <span class="comment"># 从其他仓库服务器下载镜像</span></span><br><span class="line"></span><br><span class="line">docker images  <span class="comment"># 查看所有镜像</span></span><br><span class="line">docker ps  <span class="comment"># 查看正在运行的容器，-a 所有容器</span></span><br><span class="line"></span><br><span class="line">docker run &lt;镜像名&gt;  <span class="comment"># 根据镜像新建并启动容器</span></span><br><span class="line">docker run -d --name &lt;容器名&gt; &lt;镜像名&gt;  <span class="comment"># 基于镜像启动一个容器</span></span><br><span class="line"><span class="comment">## --name 自定义容器名称，如果没有指定名称，会给一个随机名</span></span><br><span class="line"><span class="comment">## -d 后台启动该容器</span></span><br><span class="line"><span class="comment">## --rm 容器结束后自动删除，即创建的容器是一次性的，但拉取的镜像会保下来</span></span><br><span class="line"><span class="comment">## -p 80:8080 将容器内部的 8080 端口映射到宿主机的 80 端口上，宿主机通过 80 端口可以访问容器内部 8080 端口的服务</span></span><br><span class="line"><span class="comment">## -v /path/to/host:/path/to/container 挂载宿主机的目录到容器的目录</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker start &lt;容器ID/名称&gt;  <span class="comment"># 启动已有的容器，ID值输入前3~4位即可</span></span><br><span class="line">docker stop &lt;容器ID/名称&gt;  <span class="comment"># 停止运行中的容器，不会删除容器</span></span><br><span class="line"></span><br><span class="line">docker logs -f &lt;容器ID/名称&gt;  <span class="comment"># 动态查看已启动的容器的日志</span></span><br><span class="line"></span><br><span class="line">docker <span class="built_in">exec</span> &lt;容器名&gt; node index.js  <span class="comment"># 通过容器执行命令</span></span><br><span class="line"></span><br><span class="line">docker <span class="built_in">rm</span> &lt;容器名&gt;  <span class="comment"># 删除已经停止的容器，-f 强制删除</span></span><br><span class="line">docker image <span class="built_in">rm</span> &lt;镜像名&gt;  <span class="comment"># 删除镜像文件</span></span><br><span class="line"></span><br><span class="line">docker built  <span class="comment"># 根据Dokcerfile文件构建镜像，-t 指定镜像名称和标签</span></span><br><span class="line"></span><br><span class="line">docker rename xxx xxx  <span class="comment"># 重命名容器</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从容器中拷贝文件到本地</span></span><br><span class="line">docker <span class="built_in">cp</span> &lt;容器ID/名称&gt;:/path/to/file  C:\Users\yzz\Desktop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过容器重打一个新镜像</span></span><br><span class="line">docker commit &lt;容器名&gt; &lt;镜像名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-完整命令示例">2.2  完整命令示例</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在一个项目中通过 Dockerfile 构建镜像</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 在一个项目中，已经有了 Dockerfile 文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建镜像</span></span><br><span class="line">docker build -t my_docker_image:v1.0 .  </span><br><span class="line"><span class="comment">## 最后的 . 表示当前目录下，该目录下应当有 Dockerfile 文件和构建镜像需要的其它文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过镜像创建容器，并启动容器</span></span><br><span class="line">docker run -d --<span class="built_in">rm</span> --name my_docker_container my_docker_image -p 80:8080</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以 bash 命令行进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> my_docer_container bash </span><br><span class="line"></span><br><span class="line">docker restart my_docer_container  <span class="comment"># 重启容器，容器不会销毁</span></span><br><span class="line">docker stop my_docer_container  <span class="comment"># 停止容器</span></span><br></pre></td></tr></table></figure>
+<h2 id="三、Dockerfile">三、Dockerfile</h2>
+<h3 id="3-1-一些概念">3.1 一些概念</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Dockerfile 是一个文本文件，用来构建 Docker 镜像，</p>
+</li>
+<li class="lvl-2">
+<p>在 Dockerfile 中，详细完整地描述了在一个全新的环境中（Linux）成功执行代码程序的所有步骤</p>
+</li>
+<li class="lvl-2">
+<p>一般情况下，Dockerfile 会基于某个已经有一定代码运行环境的镜像去构建自己的镜像，比如打包 Python 代码作为一个镜像， 就可以基于 <code>python:3.10-slim</code> 等镜像</p>
+</li>
+<li class="lvl-2">
+<p>只有当容器被初次创建时，才会执行 Dockerfile 中的 CMD 命令（或 ENTRYPOINT）</p>
+</li>
+<li class="lvl-2">
+<p>启动已存在的容器，是不会执行 CMD 命令的</p>
+</li>
+</ul>
+<h3 id="3-2-常用语法">3.2 常用语法</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>FROM</code> 基于某个基础镜像去构建我写的镜像</p>
+</li>
+<li class="lvl-2">
+<p><code>WORKDIF</code> 指定当前工作目录</p>
+</li>
+<li class="lvl-2">
+<p><code>COPY</code> 复制本地文件到镜像中</p>
+</li>
+<li class="lvl-2">
+<p><code>RUN</code> 在构建镜像时就执行的命令</p>
+</li>
+<li class="lvl-2">
+<p><code>CMD</code> 在容器真正运行的时候才会执行的命令</p>
+</li>
+<li class="lvl-2">
+<p><code>EXPOSE</code> 镜像开放的端口</p>
+</li>
+<li class="lvl-2">
+<p><code>ENV</code> 指定容器中的环境变量和值</p>
+</li>
+</ul>
+<h3 id="3-3-完整-Dockerfile-示例">3.3 完整 Dockerfile 示例</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用官方的OpenJDK运行时作为父镜像</span></span><br><span class="line">FROM openjdk:11-jre-slim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置环境变量GROBID_HOME为指定目录</span></span><br><span class="line">ENV GROBID_HOME=/opt/grobid</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将本地全部文件复制到指定目录下</span></span><br><span class="line">COPY . <span class="variable">$&#123;GROBID_HOME&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工作目录，后续指令都会在这个工作目录下进行</span></span><br><span class="line">WORKDIR <span class="variable">$&#123;GROBID_HOME&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装必要的依赖包</span></span><br><span class="line"><span class="comment"># 反斜杠表示命令还没有结束，用以换行</span></span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -y \</span><br><span class="line">    wget \</span><br><span class="line">    unzip \</span><br><span class="line">    build-essential \</span><br><span class="line">    libxml2-dev \</span><br><span class="line">    libxslt1-dev \</span><br><span class="line">    zlib1g-dev \</span><br><span class="line">    &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span><br><span class="line"></span><br><span class="line"><span class="comment"># Download and install GROBID models</span></span><br><span class="line">RUN ./gradlew grobid-home:installModels</span><br><span class="line"></span><br><span class="line"><span class="comment"># Docker容器应该开放8070端口，在实际运行该容器时，需要用到 -p 参数来实际映射端口</span></span><br><span class="line">EXPOSE 8070</span><br><span class="line"></span><br><span class="line"><span class="comment"># Start the GROBID service</span></span><br><span class="line">CMD [<span class="string">&quot;./gradlew&quot;</span>, <span class="string">&quot;run&quot;</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="四、docker-compose">四、docker compose</h2>
+<h3 id="4-1-基础概念">4.1 基础概念</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>镜像运行成为容器需要 <code>docker run</code> 命令去定义，但是某个命令可能会较长，而且如果有多个镜像，就需要大量的命令，docker compose 用以在一个 <code>yaml</code> 文件中详细定义这些镜像的启动方式，从而节省了冗长的 <code>docker run</code> 命令</p>
+</li>
+<li class="lvl-2">
+<p>也就是说，docker compose 用于定义和运行多个 Docker 镜像启动为容器的方式</p>
+</li>
+</ul>
+<h3 id="4-2-语法和命令">4.2 语法和命令</h3>
+<ol>
+<li class="lvl-3">
+<p>基础 docker compose 语法</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker compose pull  <span class="comment"># 拉取最新镜像</span></span><br><span class="line"></span><br><span class="line">docker compose up -d  <span class="comment"># 启动容器，-d 后台启动</span></span><br><span class="line"></span><br><span class="line">dcker compose down  <span class="comment"># 停止并删除容器</span></span><br><span class="line"></span><br><span class="line">docker compose logs -f  <span class="comment"># 查看容器的日志， --tail 100 查看最近的 100 条日志</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p><code>.env</code> 环境变量</p>
+<ul class="lvl-2">
+<li class="lvl-5"><code>docker-compose.yaml</code>会默认去尝试读取同目录下的<code>.env</code>文件作为变量值使用</li>
+<li class="lvl-5"><code>.env</code>文件的变量只会作用到 <code>docker-compose.yaml</code>文件中，不会作用到容器中</li>
+<li class="lvl-5">需要作用在容器中的变量，需要通过<code>env_file</code>或者<code>environment</code>定义</li>
+<li class="lvl-5">如果修改了已经启动的容器的环境变量，通过<code>restart</code>是无法做到应用到容器的，需要重新构建容器并启动</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>完整 docker-compose.yaml 示例</p>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.8&#x27;</span>  <span class="comment"># 指定 docker-compose 文件的版本</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">my_docker_container:</span>  <span class="comment"># 服务名称，与 docker run 中的 --name 相对应</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">my_docker_image</span>  <span class="comment"># 指定要使用的镜像</span></span><br><span class="line">    <span class="attr">ports:</span>  <span class="comment"># 映射端口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;80:8080&quot;</span>  <span class="comment"># 将容器的 8080 端口映射到宿主机的 80 端口</span></span><br><span class="line">    <span class="attr">volumes:</span>  <span class="comment"># 定义挂载的卷</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;/path/on/host:/path/in/container&quot;</span>  <span class="comment"># 将宿主机的路径挂载到容器中</span></span><br><span class="line">    <span class="attr">environment:</span>  <span class="comment"># 配置到容器中的环境变量</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PORT=8080</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span>  <span class="comment"># 容器退出时总是重启</span></span><br></pre></td></tr></table></figure>
+<h2 id="疑问与解答">疑问与解答</h2>
+<ol>
+<li class="lvl-3">
+<p>怎么查看一个现有镜像的 Dockerfile 文件？</p>
+</li>
+</ol>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>无法直接查看。</p>
+<ol>
+<li class="lvl-5">如果镜像的 DockerHub 页面给出了 Dockerfile 文件，那可以看到，但也是别人给你的而不是直接从镜像中得到的。</li>
+<li class="lvl-5">可以通过一些工具去反编译 docker 镜像。</li>
+<li class="lvl-5">通过 <code>docker history</code> 命令查看镜像构建历史。类似与你无法确定一个<code>.exe</code>文件会做什么、怎么做的，你也无法确定一个docker镜像会创建什么样的容器、怎么创建的容器。同样的，就像你无法保证一个<code>.exe</code>文件是安全的，一个镜像也不一定是决定安全的。</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li class="lvl-3">
+<p>docker 启动的容器的数据会保留吗</p>
+</li>
+</ol>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果只是停止了容器，再次启动容器时，数据会保留，因为容器的文件系统和状态未被重置；如果是删除了容器，那么再次通过镜像启动容器时，数据将不会存在。</p>
+</li>
+<li class="lvl-2">
+<p>Docker 容器的数据持久化主要依赖于数据卷（Volumes）或绑定挂载（Bind Mounts）</p>
+<ol>
+<li class="lvl-5">数据卷（Volumes）：Docker 可以创建数据卷来持久化容器数据。数据卷是一个专门用于持久化数据的仓库，它在文件系统中独立于容器的生存周期。即使容器被删除，数据卷中的数据仍然存在，直到显式地删除数据卷。</li>
+<li class="lvl-5">绑定挂载（Bind Mounts）（最常用方式）：可以将宿主机的文件系统目录或文件挂载到容器内部，这样容器内的数据就会存储在宿主机的指定位置。即容器使用宿主机的磁盘。</li>
+<li class="lvl-5">如果数据直接写入容器的文件系统，而没有使用数据卷或绑定挂载，那么当容器被删除时，这些数据也会丢失。</li>
+</ol>
+<ul class="lvl-2">
+<li class="lvl-4">
+<p>当使用数据卷或绑定挂载时，即使容器停止或被销毁，数据仍然安全地存储在指定的位置。下次启动相同名称的容器时，可以使用相同的数据卷或挂载点，这样数据库就可以继续访问之前的数据。</p>
+</li>
+<li class="lvl-4">
+<p>如果没有做容器的数据的持久化处理，那在容器停止后，容器里的数据会丢失。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker volume create my_volume  <span class="comment"># 创建一个卷</span></span><br><span class="line"></span><br><span class="line">docker run -d -v my_volume:/path/in/container my_image  <span class="comment"># 使用卷启动容器</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者进行绑定挂载启动容器</span></span><br><span class="line">docker run -d -v /path/on/host:/path/in/container my_image</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li class="lvl-3">
+<p>从 dockerhub 上拉取的镜像存储在了哪里，如何找到我已经拉取的那个镜像文件，镜像文件可以随意移动位置吗？</p>
+</li>
+</ol>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Docker 会将镜像文件存储在本地的 Docker 镜像文件夹中。</p>
+</li>
+<li class="lvl-2">
+<p>docker 镜像文件无法移动，镜像文件是由多个层组成的，Docker 会将每一层存储在镜像库中，并在需要时重新构建镜像。Docker 需要通过其内部机制来管理这些文件。</p>
+</li>
+<li class="lvl-2">
+<p>可以使用 docker save 命令将镜像保存为一个 tar 文件 <code>docker save -o myimage.tar myimage:tag</code></p>
+</li>
+<li class="lvl-2">
+<p>使用 docker load 命令重新加载镜像的 tar 文件 <code>docker load -i myimage.tar</code></p>
+</li>
+<li class="lvl-2">
+<p>使用 docker inspect 命令可以查看镜像的详细信息 <code>docker inspect myimage:tag</code></p>
+</li>
+</ul>
+<ol start="4">
+<li class="lvl-3">
+<p>某个项目用 docker 启动，代码更新后，docker上的东西需要跟随代码更新吗，如何更新</p>
+</li>
+</ol>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果是本地的代码并构建的镜像：</p>
+<ol>
+<li class="lvl-5">更新 Dockerfile（如果需要的话）</li>
+<li class="lvl-5">构建新镜像 <code>docker build</code></li>
+<li class="lvl-5">停止并删除旧容器</li>
+<li class="lvl-5">通过新镜像构建容器</li>
+</ol>
+</li>
+<li class="lvl-2">
+<p>如果是 dockerhub 上拉取的镜像有了更新：</p>
+<ol>
+<li class="lvl-5">重新拉取镜像 <code>docker pull</code></li>
+<li class="lvl-5">停止并删除旧容器</li>
+<li class="lvl-5">运行新容器</li>
+</ol>
+</li>
+<li class="lvl-2">
+<p>如果是在容器中进行了更新代码等操作，可以根据容器重打一个新镜像</p>
+<ol>
+<li class="lvl-5"><code>docker commit &lt;容器名&gt; &lt;镜像名:v1.1&gt;</code></li>
+<li class="lvl-5">根据新镜像重新启动容器</li>
+</ol>
+</li>
+</ul>
+<h2 id="其它知识">其它知识</h2>
+<ol>
+<li class="lvl-3">
+<p>推送镜像到 dockerhub 或 harbor 等仓库</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登录个人账号</span></span><br><span class="line">docker login</span><br><span class="line"><span class="comment">## 默认是 hub.docker.com ，可以指定仓库地址，如果 docker login xxx.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以为镜像打一个命名空间格式的镜像名和标签，可直接推送到目标仓库</span></span><br><span class="line">docker tag my_image:v1.2 xxx.com/my/my_image:v1.2  <span class="comment"># 没有命令空间的标识，则推到默认的 hub.docker.com</span></span><br><span class="line"></span><br><span class="line">docker xxx.com/my/my_image:v1.2</span><br></pre></td></tr></table></figure>
+<h2 id="参考链接">参考链接</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html">https://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="http://www.dockerinfo.net/">http://www.dockerinfo.net/</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice/contributing">https://yeasy.gitbook.io/docker_practice/contributing</a></p>
+</li>
+<li class="lvl-2">
+<p>docker快速入门手册：<a target="_blank" rel="noopener" href="https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP">https://docker.easydoc.net/doc/81170005/cCewZWoN/lTKfePfP</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14s4y1i7Vf/?p=1">https://www.bilibili.com/video/BV14s4y1i7Vf/?p=1</a></p>
+</li>
+<li class="lvl-2">
+<p>docker在线平台：<a target="_blank" rel="noopener" href="https://labs.play-with-docker.com/">https://labs.play-with-docker.com/</a></p>
+</li>
+</ul>
+
+  </article>
+
+  <!-- prev and next -->
+  <div class="flex justify-between mt-4 pt-4
+    border-t border-[var(--c-sep)] text-sm
+    gap-2 text-[var(--c-50)]
+  ">
+    <div>
+      
+        <a href="/2025/01/01/2024%E7%9A%84%E4%B8%80%E5%B9%B4/"
+          class="
+            transition-all
+            flex justify-center
+            hover:-translate-x-1
+            hover:text-[var(--c-80)]
+          ">
+          <iconify-icon width="20" icon="mingcute:left-fill" data-inline="false">
+          </iconify-icon>
+          2024的一年
+        </a>
+      
+    </div>
+    <div>
+      
+        <a href="/2024/12/29/Git/"
+          class="
+            flex 
+            justify-center
+            hover:translate-x-1 
+            transition-transform
+            hover:text-[var(--c-100)]
+          "
+        >
+          Git
+          <iconify-icon width="20" icon="mingcute:right-fill" data-inline="false"></iconify-icon>
+        </a>
+      
+    </div>
+  </div>
+
+  <!-- comment -->
+  <div class="article-comments mt-12">
+    
+
+  </div>
+</section>
+<!-- js inspect -->
+
+<script src="/lib/clipboard.min.js"></script>
+
+
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  $(document).ready(() => {
+    const maraidConfig = {
+      theme: "default",
+      logLevel: 3,
+      flowchart: { curve: "linear" },
+      gantt: { axisFormat: "%m/%d/%Y" },
+      sequence: { actorMargin: 50 },
+    };
+    mermaid.initialize(maraidConfig);
+  });
+</script>
+
+
+
+<script src="/lib/fancybox/fancybox.umd.min.js"></script>
+
+<script>
+  $(document).ready(() => {
+    $('.post-content').each(function(i){
+      $(this).find('img').each(function(){
+        if ($(this).parent().hasClass('fancybox') || $(this).parent().is('a')) return;
+        var alt = this.alt;
+        var title = this.title;
+        if (alt) $(this).after('<span class="fancybox-alt">' + alt + '</span>');
+        else if (title) $(this).after('<span class="fancybox-title">' + title + '</span>');
+        $(this).wrap('<a class="fancybox-img" href="' + this.src + '" data-fancybox=\"gallery\" data-caption="' + title + '"></a>')
+      });
+      $(this).find('.fancybox').each(function(){
+        $(this).attr('rel', 'article' + i);
+      });
+    });
+
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        // options
+    })
+  })
+</script>
+
+<!-- tocbot begin -->
+
+<script src="/lib/tocbot/tocbot.min.js"></script>
+
+<script>
+  $(document).ready(() => {
+      tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.post-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.post-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3',
+        // For headings inside relative or absolute positioned containers within content.
+        hasInnerContainers: true,
+    });
+  })
+</script>
+<!-- tocbot end -->
+
+  </main>
+  <footer class="flex flex-col mt-18 mb-12 items-center
+  text-[var(--c-50)] text-sm">
+  <div class="flex flex-row items-center my-12">
+    
+    
+        
+        
+            
+            
+        
+        <a class="
+            hover:text-[var(--c-theme)]
+            hover:bg-[var(--c-20)]
+            rounded-lg
+            p-2
+            my-1
+            flex flex-row items-center
+            group" title="Github" target="_blank" rel="noopener" href="https://www.github.com/yzztin">
+            <iconify-icon width="28" icon="mingcute:github-fill"></iconify-icon>
+        </a>
+    
+        
+        
+            
+            
+        
+        <a class="
+            hover:text-[var(--c-theme)]
+            hover:bg-[var(--c-20)]
+            rounded-lg
+            p-2
+            my-1
+            flex flex-row items-center
+            group" title="Twitter" target="_blank" rel="noopener" href="https://www.twitter.com/yzztin">
+            <iconify-icon width="28" icon="mingcute:social-x-fill"></iconify-icon>
+        </a>
+    
+
+  </div>
+  <!-- busuanzi -->
+  <div class="mb-6">
+    
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- Busuanzi Analytics -->
+<div class="flex flex-col items-center mb-2">
+  <div class="flex flex-row items-center">
+    <iconify-icon width="16" icon="ic:round-person" width="18"></iconify-icon>
+    <span class="mr-1"> Visitors: </span>
+    <span id="busuanzi_value_site_uv"></span>
+  </div>
+  <div class="flex flex-row items-center">
+    <iconify-icon width="16" icon="carbon:view-filled" width="18"></iconify-icon>
+    <span class="mx-1"> Page Views:</span>
+    <span id="busuanzi_value_site_pv"></span>
+  </div>
+</div>
+<!-- End Busuanzi Analytics -->
+
+
+  </div>
+  <!-- copyright -->
+  <div class="flex flex-row items-center gap-2">
+    <a class="hover:underline"
+      target="_blank"
+      href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    >
+      CC BY-NC-SA 4.0
+    </a>
+    <span>© 2023-2024</span>
+    <a class="hover:underline"
+    href="https://github.com/yzztin" 
+    target="_blank" 
+    rel="noopener noreferrer">Yzztin</a>
+  </div>
+  <!-- powered by -->
+  <div class="flex items-center gap-1">
+    <span>Powered by</span>
+    <a class="hover:underline" 
+    href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+    <span>&</span>
+    <a href="https://github.com/chen-yingfa/hexo-theme-fengye" 
+    class="hover:underline"
+    target="_blank"
+      rel="noopener noreferrer"
+      >
+      Fengye
+    </a>
+  </div>
+
+</footer>
+
+  <div class="
+    back-to-top
+    fixed right-6
+    z-1024
+    -bottom-20
+    rounded-lg
+    font-bold
+    py-1 px-2
+    text-[var(--c-80)]
+    bg-[var(--c-20)]
+    cursor-pointer
+    text-center
+    drop-shadow-md
+  ">
+    <span class="flex justify-center items-center text-sm">
+      <span id="scrollpercent"><span>0</span> %</span>
+      <iconify-icon width="18" icon="mingcute:arrow-to-up-fill" id="go-top"></iconify-icon>
+    </span>
+  </div>
+  
+<script src="/js/main.js"></script>
+
+
+  <div class="fixed top-0 bottom-0 left-0 right-0 pointer-events-none print:hidden" id="maple"></div>
+</body>
+
+</html>
