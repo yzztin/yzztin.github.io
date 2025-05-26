@@ -38,7 +38,7 @@ nav:
   # if they are provided. It will be an empty button if none of these are 
   # provided.
 
-email: yzztin223@gamil.com
+email: yzz223@qq.com
 my_location: Beijing, China
 # resume
 cv_path: /pdf/test.jpg  # source/pdf/
@@ -61,9 +61,9 @@ links:
   # ZhiHu:
   #   link: https://www.zhihu.com/people/chen-ying-fa-34
   #   icon: ri:zhihu-line
-  Twitter:
-    link: https://www.twitter.com/yzztin
-    icon: mingcute:social-x-fill
+  # Twitter:
+  #   link: https://www.twitter.com/yzztin
+  #   icon: mingcute:social-x-fill
   # You can add more links below using the format above.
 
 # analytics
