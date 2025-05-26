@@ -55,9 +55,9 @@ show_profile_image: true
 
 # links
 links:
-  Github:
-    link: https://www.github.com/yzztin
-    icon: mingcute:github-fill
+  # Github:
+  #   link: https://www.github.com/yzztin
+  #   icon: mingcute:github-fill
   # ZhiHu:
   #   link: https://www.zhihu.com/people/chen-ying-fa-34
   #   icon: ri:zhihu-line
