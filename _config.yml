@@ -106,7 +106,7 @@ deploy:
   repo: git@github.com:yzztin/yzztin.github.io.git
   branch: hexo
   name: yzz
-  email: yzztin223@gmail.com
+  email: yzz223@qq.com
 
 # https://www.wrysmile.cn/Hexo-05.html
 markdown:
