@@ -4,7 +4,7 @@ nav:
   posts:
     path: ./archives
     icon: mingcute:inbox-fill
-    name: Archives  # 图标旁显示的名称
+    name: Archives # 图标旁显示的名称
     # show_name: false  # 取消显示
   # publications:
   #   path: ./publications
@@ -35,13 +35,13 @@ nav:
 
   # To add a new page, use hexo new page, then add another entry below.
   # Each entry MUST have a path. In addition, it will render icon and/or text
-  # if they are provided. It will be an empty button if none of these are 
+  # if they are provided. It will be an empty button if none of these are
   # provided.
 
 email: yzz223@qq.com
 my_location: Beijing, China
 # resume
-cv_path: /pdf/test.jpg  # source/pdf/
+cv_path: /pdf/test.jpg # source/pdf/
 cv_last_update_date: Aug, 2024
 show_featured_posts: true
 year_align_center: true
@@ -50,20 +50,20 @@ year_align_center: true
 favicon: /images/favicon-32x32.ico
 
 # logo
-portrait: /images/avatar.jpg  # source/images/
+portrait: /images/avatar.jpg # source/images/
 show_profile_image: true
 
 # links
 links:
-  # Github:
-  #   link: https://www.github.com/yzztin
-  #   icon: mingcute:github-fill
-  # ZhiHu:
-  #   link: https://www.zhihu.com/people/chen-ying-fa-34
-  #   icon: ri:zhihu-line
-  # Twitter:
-  #   link: https://www.twitter.com/yzztin
-  #   icon: mingcute:social-x-fill
+  Github:
+    link: https://www.github.com/yzztin
+    icon: mingcute:github-fill
+  ZhiHu:
+    link: xxx
+    icon: ri:zhihu-line
+  Twitter:
+    link: xxx
+    icon: mingcute:social-x-fill
   # You can add more links below using the format above.
 
 # analytics
