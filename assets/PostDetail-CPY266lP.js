@@ -1,0 +1,1 @@
+import{_ as e}from"./PostDetail.vue_vue_type_script_setup_true_lang-m7h8Mcgu.js";import{d as o,c as t,o as a}from"./index-DEFPQWO9.js";const m=o({__name:"PostDetail",setup(r){return(s,_)=>(a(),t(e))}});export{m as default};
