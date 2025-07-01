@@ -1,0 +1,50 @@
+---
+title: 测试文章
+date: 2025-03-29
+updated: 2025-06-11
+excerpt: 本文主要用于展示 markdown 主要样式
+category: 测试
+tags: 
+  - test1
+  - test2
+featured: true
+thumbnail: /images/测试图片.png
+thumbnail_alt: 测试图片
+--- 
+
+# 标题1
+
+> ==这是==一篇**中文测试文章**，用于~~测试中文~~内容的*显示效果*。
+
+- 无序列表
+- 无序列表
+
+1. 有序列表
+2. 有序列表
+
+---
+
+* [ ] 任务1
+* [ ] 任务2
+
+[超链接](https://github.com/yzztin "github")
+
+```bash
+docker build .
+docker compose up -d 
+docker compose down
+```
+
+
+
+## 标题1.1
+
+中文内容测试，包含各种中文字符和标点符号。
+
+### 标题1.1.1
+
+更多中文内容...
+
+![测试图片](/images/测试图片.png)
+
+![测试图片](/images/测试图片.png)

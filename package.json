@@ -1,0 +1,42 @@
+{
+  "name": "fengye-vue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "@fancyapps/ui": "^5.0.36",
+    "@iconify/vue": "^5.0.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "@vueuse/core": "^13.3.0",
+    "dompurify": "^3.2.6",
+    "gray-matter": "^4.0.3",
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.1.0",
+    "markdown-it-code-copy": "^0.2.2",
+    "markdown-it-highlightjs": "^4.2.0",
+    "marked": "^15.0.12",
+    "pinia": "^3.0.2",
+    "tocbot": "^4.36.4",
+    "vue": "^3.5.13",
+    "vue-router": "4",
+    "vue3-markdown-it": "^1.0.10"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^22.15.24",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/tsconfig": "^0.7.0",
+    "autoprefixer": "10.4.17",
+    "postcss": "8.4.35",
+    "tailwindcss": "3.4.1",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vue-tsc": "^2.2.8"
+  }
+}

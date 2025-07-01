@@ -1,0 +1,253 @@
+/* 变量依然建议单独放在 variables.css 并在这里导入 */
+@import "./variables.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 基础样式，放在 base 层 */
+@layer base {
+  html,
+  body {
+    @apply w-full m-0 p-0 transition duration-200;
+    text-underline-offset: 2px;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
+  }
+
+  ::selection {
+    background-color: var(--c-theme);
+    color: var(--c-0);
+  }
+
+  hr {
+    @apply border-0 my-6;
+    background-color: var(--c-sep);
+    height: 1px;
+  }
+}
+
+/* 文章内容相关，放在 components 层 */
+@layer components {
+  .post-content hr.footnotes-sep {
+    @apply mb-4;
+    background-color: var(--c-sep);
+    margin-right: 50%;
+    height: 1px;
+    border: none;
+  }
+
+  .post-content blockquote {
+    @apply border-l-4 pl-4 my-6 font-normal text-[var(--c-50)];
+    border-color: var(--c-theme);
+  }
+  .post-content blockquote p {
+    @apply m-0;
+    color: var(--c-50);
+  }
+
+  /* 多行代码块的颜色 */
+  .prose pre {
+    background: var(--highlight-background);
+    color: var(--highlight-foreground);
+  }
+
+  /* 目录样式 */
+  .toc-list > li {
+    @apply mt-1 mb-1 !important;
+  }
+
+  .toc-list > ol {
+    @apply mt-1 !important;
+  }
+
+  li.task-list-item {
+    list-style-type: none;
+  }
+  li.task-list-item .task-list-item-checkbox {
+    margin: 0 0.2em 0.25em -1.6em;
+  }
+  li.task-list-item input:checked {
+    color: var(--c-theme);
+    text-decoration: line-through;
+  }
+
+  .post-excerpt {
+    pointer-events: none;
+  }
+  .post-excerpt a {
+    @apply underline;
+  }
+  .post-excerpt p {
+    @apply my-0 py-0;
+  }
+
+  .post-container .footnote-ref {
+    display: none;
+  }
+
+  .post-content .fancybox-img img {
+    @apply mb-2 block mx-auto rounded max-w-full h-auto;
+  }
+  .post-content .fancybox-title,
+  .post-content .fancybox-alt {
+    @apply text-sm text-center text-[var(--c-50)] m-0 p-0 font-normal w-full block;
+  }
+
+  .back-to-top {
+    -webkit-transform: translateZ(0);
+    transition-property: bottom;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+  }
+  .back-to-top:hover {
+    transform: scale(1.15);
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+  .back-to-top.back-to-top-on {
+    bottom: 30px;
+  }
+}
+
+/* 代码高亮相关，放在 components 层 */
+@layer components {
+  figure.highlight {
+    @apply px-2 my-2 rounded overflow-auto relative flex flex-col bg-[var(--c-bg-code)] border border-[var(--c-sep)];
+  }
+  figure.highlight .gutter {
+    display: none;
+  }
+  figure.highlight .code {
+    @apply p-0;
+  }
+  figure.highlight .code .line {
+    color: var(--highlight-foreground);
+  }
+  figure.highlight pre {
+    background: var(--highlight-background);
+    margin: 0;
+  }
+  figure.highlight .code-language {
+    @apply text-xs text-[var(--c-50)] bg-[var(--c-bg-code)] block px-4 py-2 border-b border-[var(--c-sep)] font-medium;
+  }
+  figure.highlight .copy-icon {
+    @apply absolute right-2 top-2 w-7 h-7 bg-[var(--c-bg-code)] border border-[var(--c-border)] text-[var(--c-60)] cursor-pointer rounded p-1 transition-all;
+  }
+  figure.highlight .copy-icon:hover {
+    @apply bg-[var(--c-20)] scale-110;
+  }
+  pre {
+    @apply p-2.5 overflow-auto font-mono;
+    background: var(--highlight-background);
+    color: var(--highlight-foreground);
+  }
+  pre code {
+    @apply p-0;
+  }
+  pre .comment {
+    color: var(--highlight-comment);
+  }
+  pre .string {
+    color: var(--highlight-string);
+  }
+  pre .keyword,
+  pre .doctag {
+    color: var(--highlight-keyword);
+  }
+  pre .class_ {
+    color: var(--highlight-class);
+  }
+  pre .function_ {
+    color: var(--highlight-function);
+  }
+  pre .tag > .name {
+    color: var(--prism-builtin);
+  }
+  pre .attr {
+    color: var(--prism-property);
+  }
+  pre .meta {
+    color: var(--prism-decorator);
+  }
+  pre .params {
+    color: var(--prism-decorator);
+  }
+  .highlight .gutter .line {
+    color: var(--c-code-line-number);
+    padding-right: 1rem;
+    text-align: right;
+    user-select: none;
+  }
+}
+
+/* 搜索相关，放在 components 层 */
+@layer components {
+  .search-overlay {
+    @apply fixed inset-0 bg-black/30 transition-colors duration-200 visible pr-1.5 backdrop-blur z-[1000];
+  }
+  .search-overlay.hidden {
+    @apply bg-transparent invisible pr-0;
+    transition: visibility 0s linear 0.2s, background-color 0.2s;
+  }
+  .search-overlay.hidden .search-content {
+    @apply relative top-[15%] opacity-0;
+  }
+  .search-content {
+    @apply relative top-[18%] opacity-100 bg-transparent z-[999] rounded-xl m-8 transition-all duration-200 outline-0;
+  }
+  @media (min-width: 768px) {
+    .search-content {
+      @apply w-[520px] mx-auto;
+    }
+  }
+  .search-title {
+    @apply flex justify-between items-center rounded-xl bg-[var(--c-0)] px-2 shadow;
+  }
+  .search-input {
+    @apply w-full border-0 outline-0 bg-transparent px-2 text-2xl h-10 leading-10 text-[var(--c-text)];
+  }
+  .search-result {
+    @apply max-h-[350px] overflow-auto bg-[var(--c-0)] rounded-xl mt-2 shadow;
+  }
+  .search-result ul {
+    @apply p-2.5;
+  }
+  .search-result-list li {
+    @apply list-none p-2.5 text-2xl border-b border-dashed border-[var(--c-sep)] transition-colors duration-200;
+  }
+  .search-result-list li:hover {
+    @apply bg-[var(--c-10)];
+  }
+  .search-result-list li:last-of-type {
+    @apply border-b-0;
+  }
+  .search-result-abstract {
+    @apply p-2.5 pt-0 text-base text-[var(--c-50)] break-all;
+  }
+  .search-keyword {
+    @apply text-[var(--c-theme)] font-semibold;
+  }
+  .local-search-empty {
+    @apply text-2xl text-[var(--c-text)] text-center p-8;
+  }
+}
+
+/* 响应式调整 */
+@layer utilities {
+  @media (max-width: 768px) {
+    .search-content {
+      @apply m-4;
+    }
+    .search-input {
+      @apply text-xl;
+    }
+    .search-result-list li {
+      @apply text-xl;
+    }
+  }
+}
