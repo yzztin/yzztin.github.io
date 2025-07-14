@@ -38,16 +38,25 @@ featured: true
   +   在 wsl Linux 上可以直接使用 windows 的显卡，查看显卡：\`nvidia-smi\`
 
 ## 3. wsl 常用配置
+> 官方说明：https://learn.microsoft.com/zh-cn/windows/wsl/wsl-config#wslconf
 ### 3.1 共享端口
 > 比如我在 wsl 开启了一个 5001 端口服务，我希望可以通过本地主机 127.0.0.1:5001 访问到 wsl 上的服务
-1. 在 windows 用户目录下新建 \`.wslconfig\` 文件，写入内容如下：
+1. 在 windows 用户目录下新建 \`.wslconfig\` 文件，可参考写入内容如下，其中关键是将 \`networkingMode\` 设置为 \`mirrored\`，其他配置是我个人的需求，仅供参考
+   > 注：我遇到一个奇怪的问题是，当设置网络模式为 \`mirrored\` 时，查询局域网内的服务器上的数据库（pgsql）时速度异常慢，设置为 \`default\` 时正常。
     \`\`\`
-    [experimental]
+    [wsl2]
+    memory=4GB
+    swap=4GB
     networkingMode=mirrored
-    dnsTunneling=true
+    #networkingMode=default
     firewall=true
     autoProxy=true
+    dnsTunneling=true
+
+    [experimental]
     hostAddressLoopback=true
+    autoMemoryReclaim=gradual
+    sparseVhd=true
     \`\`\`
 2. 执行 \`wsl --shutdown\` 关闭 wsl 子系统，等待十几秒后重启
 
