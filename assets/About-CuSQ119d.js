@@ -1,1 +1,0 @@
-import{_ as e}from"./PostDetail.vue_vue_type_script_setup_true_lang-DIV1HIfs.js";import{d as o,c as a,o as t}from"./index-B6lw2jAT.js";const p=o({__name:"About",setup(r){return(s,_)=>(t(),a(e,{isPage:!0,pageId:"about"}))}});export{p as default};
