@@ -2,13 +2,19 @@
 <html>
 
 <head>
-    <meta http-equiv="refresh" content="0; url=/" />
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
     <script>
-        // 跳转回 / 并保留路径，让 Vue Router 处理
-        const path = location.pathname + location.search + location.hash;
-        sessionStorage.redirect = path;
-        window.location.href = "/";
+        // 跳转并保留路径，让 Vue Router 处理
+        const redirectPath = location.pathname + location.search + location.hash;
+        const encoded = encodeURIComponent(redirectPath);
+        // 携带 redirect 参数跳回 index.html
+        window.location.href = "/?redirect=" + encoded;
     </script>
 </head>
+
+<body>
+    Redirecting...
+</body>
 
 </html>
