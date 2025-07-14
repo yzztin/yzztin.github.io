@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="refresh" content="0; url=/" />
+    <script>
+        // 跳转回 / 并保留路径，让 Vue Router 处理
+        const path = location.pathname + location.search + location.hash;
+        sessionStorage.redirect = path;
+        window.location.href = "/";
+    </script>
+</head>
+
+</html>
