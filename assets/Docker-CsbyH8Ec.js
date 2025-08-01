@@ -283,9 +283,9 @@ docker login
 ## 默认是 hub.docker.com ，可以指定仓库地址，如果 docker login xxx.com
 
 # 可以为镜像打一个命名空间格式的镜像名和标签，可直接推送到目标仓库
-docker tag my_image:v1.2 xxx.com/my/my_image:v1.2  # 没有命令空间的标识，则推到默认的 hub.docker.com
+docker tag my_image:v1.2 xxx.com/my_name/my_image:v1.2  # 没有命令空间的标识，则推到默认的 hub.docker.com
 
-docker xxx.com/my/my_image:v1.2
+docker push xxx.com/my_name/my_image:v1.2
 \`\`\`
 
 ## 参考链接

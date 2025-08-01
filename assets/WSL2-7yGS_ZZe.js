@@ -82,6 +82,12 @@ featured: true
 1. 设置 root 用户密码
 - 初始的 Ubuntu 中，root 密码是每次都随机的，需要手动设置
 - 执行命令：\`sudo passwd root\`
+
 2. 报错：\`WSL (12) ERROR: CreateProcessEntryCommon:570: execvpe /usr/bin/zsh\`
 - 由于设置了默认进入 zsh ，但现在 zsh 无法正常使用导致错误
-- 执行：\`wsl ~ -e bash\`，表示在用户目录下执行 bash 命令`;export{n as default};
+- 执行：\`wsl ~ -e bash\`，表示在用户目录下执行 bash 命令
+
+3. WSL2 结合 docker 使用，总是出现网络错误：\`Error response from daemon: Get "https://registry-1.docker.io/v2/": proxyconnect tcp: dial tcp 127.0.0.1:7897: connect: connection refused\`
+- windows 宿主机使用了网络代理软件 \`clash-verge\`，WSL 设置了网络模式为 \`mirrored\`
+- 这似乎是一个 bug，docker 使用了 \`127.0.0.1:7897\` 网络代理端口，但是网络连接总是失败
+- 一个临时解决方案是，在执行 \`docker pull\` 等需要网络联通时，先关闭 windows 宿主机的网络代理，然后关闭 WSL：\`wsl --shutdown\`，再重启 WSL 和 docker`;export{n as default};
