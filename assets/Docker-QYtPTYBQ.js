@@ -1,6 +1,7 @@
 const n=`---
 title: Docker
 date: 2024-12-30 19:51:01
+updated: 2025-08-05 16:55:25
 tags:
 - DevOps
 category: Notes
@@ -87,13 +88,10 @@ docker volume prune  # 清除所有未使用的卷
 **容器/镜像文件的保存：**
 \`\`\`bash
 # 打包镜像
-docker save my_image:latest > my_image_latest.tar
+docker save my_image:latest -o my_image_latest.tar
 
 # 在目标机器上加载镜像
-docker load < my_image_latest.tar
-
-# 导出容器
-docker export my_container > my_container.tar
+docker load -i my_image_latest.tar
 \`\`\`
 
 
