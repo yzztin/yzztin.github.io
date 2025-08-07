@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script>
+        // 跳转并保留路径，让 Vue Router 处理
+        const redirectPath = location.pathname + location.search + location.hash;
+        const encoded = encodeURIComponent(redirectPath);
+        // 携带 redirect 参数跳回 index.html
+        window.location.href = "/?redirect=" + encoded;
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
