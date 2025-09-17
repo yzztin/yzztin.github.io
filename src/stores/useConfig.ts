@@ -25,13 +25,13 @@ interface HeaderState {
 
 const useBaseConfig = defineStore('baseConfig', {
   state: (): BaseConfig => ({
-    title: "Yzz's Blog",
+    title: "Yzz writing",
     portrait: '/images/portrait.jpg',
     subtitle: '',
     location: 'Beijing, China',
     cvPath: '',
     cvLastUpdateDate: '2025-04-07',
-    description: 'A blog for note, thinking and life.'
+    description: 'note, thinking and life.'
   }),
   actions: {
     descriptionClean() {
